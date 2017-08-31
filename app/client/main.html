@@ -1,25 +1,21 @@
 <head>
   <title>app</title>
-</head>
-
+  <nav>
+      <div class="nav-wrapper">
+        <a href="#" class="brand-logo">Tutorial Helper</a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+     <li><a class="waves-effect waves-light btn">logout</a></li>
+      
+    </ul>
+        
+      </div>
+    </nav>
+</head>    
 <body>
-  <h1>Welcome to Meteor!</h1>
+        <div class="container">
+            {{> atForm}}
+            </div>
+      </body>
 
-  {{> hello}}
-  {{> info}}
-</body>
-
-<template name="hello">
-  <button>Click Me</button>
-  <p>You've pressed the button {{counter}} times.</p>
-</template>
-
-<template name="info">
-  <h2>Learn Meteor!</h2>
-  <ul>
-    <li><a href="https://www.meteor.com/try" target="_blank">Do the Tutorial</a></li>
-    <li><a href="http://guide.meteor.com" target="_blank">Follow the Guide</a></li>
-    <li><a href="https://docs.meteor.com" target="_blank">Read the Docs</a></li>
-    <li><a href="https://forums.meteor.com" target="_blank">Discussions</a></li>
-  </ul>
+<template name="atForm">
 </template>
