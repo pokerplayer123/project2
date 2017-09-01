@@ -16,22 +16,24 @@
         </li>
         {{/if}}
         <li class="nav-item">
-          {{> loginButtons}}
+            {{> atNavButton}}
       </li>
         </ul>
       </div>
     </div>
   </nav>
   <div class="container">
-  <h1>My Tutorials</h1>
   {{#if currentUser}}
+  <h1>My Tutorials</h1>
   <ul class="collection">
     {{#each tutorials}}
       {{> tutorial}}
       {{/each}}
 </ul>
 {{else}}
-<p>Please login to see your tutorials</p>
+<p>
+    {{> atForm}}
+</p>
 {{/if}}
 </div>
 {{> add}}
