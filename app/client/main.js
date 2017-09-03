@@ -4,8 +4,11 @@ import { Accounts } from 'meteor/accounts-base';
 
 import './main.html';
 
+//Embed the mongo database
+Tutorial = new Mongo.Collection('tutorial');
+
 Template.body.helpers({
-  tutorials(){
+  tutorials:function(){
     return Tutorials.find({});
   }
 });
