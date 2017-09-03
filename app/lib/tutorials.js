@@ -19,6 +19,9 @@ Meteor.methods({
       createdAt: new Date(),
       owner: Meteor.userId(),
       username: Meteor.user().username,
+      startTime: Meteor.user(), //adding field about tutorial start time
+      endTime: Meteor.user(), //adding field about tutorial end time
+      capacity: Meteor.user(), //adding field about expected students
     });
   },
   'tutorials.remove'(tutorial){
