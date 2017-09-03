@@ -2,11 +2,6 @@ import { Template } from 'meteor/templating';
 import { Tutorials } from '../lib/tutorials.js';
 import { Accounts } from 'meteor/accounts-base';
 
-// Accounts config
-Accounts.ui.config({
-  passwordSignupFields:'USERNAME_ONLY'
-});
-
 import './main.html';
 tutorial = new Mongo.Collection('tutorial');
 
@@ -54,3 +49,12 @@ Template.tutorial.events({
     return false;
   }
 });
+
+Template.atNavButton.events({
+  'click .login-toggle': ()=> {
+    Session.set('nav-toggle', 'open');
+  },
+  'click .logout': ()=> {
+    AccountsTemplates.logout();
+  }
+})
