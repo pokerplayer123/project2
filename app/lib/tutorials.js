@@ -18,7 +18,7 @@ Meteor.methods({
       text,
       createdAt: new Date(),
       owner: Meteor.userId(),
-       username: Meteor.user().username,
+      username: Meteor.user().username,
       tutorialName:Meteor.String(),
       courseName:Meteor.String(),
       password:Meteor.password(),
