@@ -15,6 +15,13 @@ var mySubmitFunc = function(error, state){
     }
   };
 
+var myPreSubmitFunc = function(password, info) {
+}
+
+var myPostSubmitFunc = function(userId, info) {
+}
+
+
 // myLogoutFunction
 var myLogoutFunc = function(){
     console.log('Logged out');
@@ -116,9 +123,9 @@ AccountsTemplates.configure({
 
     // Hooks
     onLogoutHook: myLogoutFunc,
-   // onSubmitHook: mySubmitFunc,
-   // preSignUpHook: myPreSubmitFunc,
-   // postSignUpHook: myPostSubmitFunc,
+   onSubmitHook: mySubmitFunc,
+   preSignUpHook: myPreSubmitFunc,
+   postSignUpHook: myPostSubmitFunc,
 
     // Texts
     texts: {

@@ -7,6 +7,14 @@ import './main.html';
 Template.body.helpers({
   tutorials:function(){
     return Tutorials.find({});
+  },
+
+  userProfile: function() {
+    return Meteor.user().profile;
+  },
+
+  userEmail: function() {
+    return Meteor.user().emails ? Meteor.user().emails[0].address : null;
   }
 });
 
