@@ -3,11 +3,11 @@ import { Tutorials } from '../lib/tutorials.js';
 import { Accounts } from 'meteor/accounts-base';
 
 import './main.html';
-tutorial = new Mongo.Collection('tutorial');
+Tutorial = new Mongo.Collection('tutorials');
 
 Template.body.helpers({
   tutorials:function(){
-    return Tutorials.find({});
+    return tutorials.find({});
   }
 });
 
@@ -15,7 +15,7 @@ Template.body.events({
 'submit .new-Tutorial': function(event){
   var tutorial = event.target.tutorial.value;
 
-  tutorial.insert({
+  tutorials.insert({
     tutorial: tutorial,
     createdAt: new Date()
   });
