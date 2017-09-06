@@ -19,6 +19,8 @@ Template.body.events({
     tutorial: tutorial,
     createdAt: new Date()
   });
+
+  target.text.value ='';
 }
 });
 
