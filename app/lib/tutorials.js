@@ -18,7 +18,7 @@ Meteor.methods({
       text,
       createdAt: new Date(),
       owner: Meteor.userId(),
-      username: Meteor.user().username,
+       username: Meteor.user().username,
       tutorialName:Meteor.String(),
       courseName:Meteor.String(),
       password:Meteor.password(),
@@ -28,6 +28,7 @@ Meteor.methods({
       startTime: Meteor.time(), //adding field about tutorial start time
       endTime: Meteor.time(), //adding field about tutorial end time
       capacity: Meteor.int(), //adding field about expected students
+
     });
   },
   'tutorials.remove'(tutorial){
