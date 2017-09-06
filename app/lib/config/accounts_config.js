@@ -14,16 +14,58 @@ var mySubmitFunc = function(error, state){
       }
     }
   };
-  
+
 // myLogoutFunction
 var myLogoutFunc = function(){
     console.log('Logged out');
 }
 
 //Add fields
-AccountsTemplates.addField({
+AccountsTemplates.addFields([
+  {
+
+  _id: "zid",
+  type: "text",
+  displayName: "zID",
+  required: true,
+},
+
+  {
+
+  _id: "firstname",
+  type: "text",
+  displayName: "First Name",
+  required: true,
+},
+
+  {
+_id: "lastname",
+type: "text",
+displayName: "Last Name",
+required: true,
+},
+
+  {
+
+_id: "gender",
+type: "select",
+displayName: "Gender",
+select: [
+  {
+    text: "Male",
+    value: "male",
+  },
+  {
+    text: "Female",
+    value: "female",
+  },
+],
+required: true,
+},
+
+{
     _id: "userType",
-    type: "radio",
+    type: "select",
     displayName: "Tutor or Student?",
     select: [
         {
@@ -34,9 +76,10 @@ AccountsTemplates.addField({
             text: "Student",
             value: "student",
     },
-    ],
-    required: true,
-});
+  ],
+  required: true,
+}]);
+
 
 AccountsTemplates.configure({
     // Behavior
@@ -90,4 +133,3 @@ AccountsTemplates.configure({
       },
     },
 });
-
