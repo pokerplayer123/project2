@@ -2,11 +2,11 @@ import { Mongo } from 'meteor/mongo';
 import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
 
-export const Tutorials = new Mongo.Collection('tutorials');
+export const Tutorials = new Mongo.Collection('tutorial');
 
 //methods that can be accessed by both client and server
 Meteor.methods({
-  'tutorials.insert'(text){
+  'tutorial.insert'(text){
     check(text, String);
 
     // Check if user is logged in
@@ -17,17 +17,17 @@ Meteor.methods({
     Tutorials.insert({
       text,
       createdAt: new Date(),
-      owner: Meteor.userId(),
+      owner: Meteor.use(),
       username: Meteor.user().username,
-      tutorialName:Meteor.String(),
-      courseName:Meteor.String(),
-      password:Meteor.password(),
-      confirmPassword:Meteor.password(),
-      startDate:Meteor.Date(),
-      endDate:Meteor.Date(),
-      startTime: Meteor.time(), //adding field about tutorial start time
-      endTime: Meteor.time(), //adding field about tutorial end time
-      capacity: Meteor.int(), //adding field about expected students
+      tutorialName:Meteor.user(),
+      courseName:Meteor.user(),
+      password:Meteor.user(),
+      confirmPassword:Meteor.user(),
+      startDate:Meteor.user(),
+      endDate:Meteor.user(),
+      startTime: Meteor.user(), //adding field about tutorial start time
+      endTime: Meteor.user(), //adding field about tutorial end time
+      capacity: Meteor.user(), //adding field about expected students
     });
   },
   'tutorials.remove'(tutorial){

@@ -3,20 +3,37 @@ import { Tutorials } from '../lib/tutorials.js';
 import { Accounts } from 'meteor/accounts-base';
 
 import './main.html';
-Tutorial = new Mongo.Collection('tutorials');
+Tutorial = new Mongo.Collection('tutorial');
 
 Template.body.helpers({
-  tutorials:function(){
-    return tutorials.find({});
+  tutorial:function(){
+    return Tutorial.find({});
   }
 });
 
 Template.body.events({
 'submit .new-Tutorial': function(event){
-  var tutorial = event.target.tutorial.value;
+  var tutorialName = event.target.tutorialName.value;
+  var courseName = event.target.courseName.value;
+  var password = event.target.password.value;
+  var confirmPassword = event.target.confirmPassword.value;
+  var startDate = event.target.startDate.value;
+  var endDate = event.target.endDate.value;
+  var startTime = event.target.startTime.value;
+  var endTime = event.target.endTime.value;
+  var capacity = event.target.capacity.value;
 
-  tutorials.insert({
-    tutorial: tutorial,
+
+  Tutorials.insert({
+    tutorialName: tutorialName,
+    courseName: courseName,
+    password: password,
+    confirmPassword: confirmPassword,
+    startDate:startDate,
+    endDate: endDate,
+    startTime: startTime,
+    endTime: endTime,
+    capacity: capacity,
     createdAt: new Date()
   });
 
