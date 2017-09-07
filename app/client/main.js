@@ -66,3 +66,43 @@ Template.atNavButton.events({
     AccountsTemplates.logout();
   }
 })
+
+
+Template.editProfile.helpers({
+  userProfile: function() {
+    return Meteor.user().profile;
+  },
+
+  userEmail: function() {
+    return Meteor.user().emails ? Meteor.user().emails[0].address : null;
+  },
+
+  compareGender: function(target) {
+    var profile = Meteor.user().profile;
+    return profile.gender == target ? 'selected' : '';
+  },
+
+  compareUserType: function(target) {
+    var profile = Meteor.user().profile;
+    return profile.userType == target ? 'selected' : '';
+  },
+
+});
+
+Template.editProfile.events({
+  'submit form': function(e){
+    var form = $(e.target);
+    var newProfile = objectifyForm(form.serializeArray());
+    Meteor.users.update({_id: Meteor.userId()}, {$set: {profile: newProfile}});
+    $('#editProfile').modal('close');
+    return false;
+  }
+});
+
+function objectifyForm(formArray) {//serialize data function
+  var returnArray = {};
+  for (var i = 0; i < formArray.length; i++){
+    returnArray[formArray[i]['name']] = formArray[i]['value'];
+  }
+  return returnArray;
+}
