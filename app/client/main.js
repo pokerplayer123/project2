@@ -22,7 +22,7 @@ Template.body.events({
 'submit .new-Tutorial': function(event){
   var tutorial = event.target.tutorial.value;
 
-  tutorial.insert({
+  Tutorials.insert({
     tutorial: tutorial,
     createdAt: new Date()
   });
@@ -36,10 +36,13 @@ Template.add.events({
 
     // Get input value from the modal so that we can insert it into the database
     const target = event.target;
-    const text = target.text.value;
+    var tutorialName = target.tutorialName.value;
+    var courseName = target.courseName.value;
+    var password = target.password.value;
+    var owner = this.userID();
 
     // Insert tutorial into collection
-    Meteor.call('tutorials.insert', text);
+    Meteor.call('tutorials.insert');
 
     // Clear form
     target.text.value = '';

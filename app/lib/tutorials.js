@@ -7,6 +7,7 @@ export const Tutorials = new Mongo.Collection('tutorials');
 //methods that can be accessed by both client and server
 Meteor.methods({
   'tutorials.insert'(text){
+    // need to edit the check input
     check(text, String);
 
     // Check if user is logged in
@@ -15,19 +16,17 @@ Meteor.methods({
     }
 //method for inserting tutorial objects into the database
     Tutorials.insert({
-      text,
       createdAt: new Date(),
-      owner: Meteor.userId(),
-      username: Meteor.user().username,
-      tutorialName:Meteor.String(),
-      courseName:Meteor.String(),
-      password:Meteor.password(),
-      confirmPassword:Meteor.password(),
-      startDate:Meteor.Date(),
-      endDate:Meteor.Date(),
-      startTime: Meteor.time(), //adding field about tutorial start time
-      endTime: Meteor.time(), //adding field about tutorial end time
-      capacity: Meteor.int(), //adding field about expected students
+      owner: new String(),
+      tutorialName:new String(),
+      courseName:new String(),
+      password:new String(),
+      confirmPassword:new String(),
+      startDate: new Date(),
+      endDate:new Date(),
+      startTime: new Time(), //adding field about tutorial start time
+      endTime: new Time(), //adding field about tutorial end time
+      capacity: new String(), //adding field about expected students
 
     });
   },

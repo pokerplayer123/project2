@@ -27,17 +27,6 @@
   <div class="container">
   {{#if currentUser}}
     <h1>My Tutorials</h1>
-
-    <div>
-      <p>Email: {{userEmail}}</p>
-      <p>Zid: {{userProfile.zid}}</p>
-      <p>Firstname: {{userProfile.firstname}}</p>
-      <p>Lastname: {{userProfile.lastname}}</p>
-      <p>User Type: {{userProfile.userType}}</p>
-      <p>Gender: {{userProfile.gender}}</p>
-    </div>
-
-
     <ul class="collection">
       {{#each tutorials}}
         {{> tutorial}}
