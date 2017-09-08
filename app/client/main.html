@@ -27,16 +27,17 @@
   <div class="container">
   {{#if currentUser}}
     <h1>My Tutorials</h1>
-
+<ul class="collection with-header">
+  <li class="collection-header"><h4>My profile</h4></li>
     <div>
-      <p>Email: {{userEmail}}</p>
-      <p>Zid: {{userProfile.zid}}</p>
-      <p>Firstname: {{userProfile.firstname}}</p>
-      <p>Lastname: {{userProfile.lastname}}</p>
-      <p>User Type: {{userProfile.userType}}</p>
-      <p>Gender: {{userProfile.gender}}</p>
+      <li class="collection-item">Email: {{userEmail}}</li>
+      <li class="collection-item">Zid: {{userProfile.zid}}</li>
+      <li class="collection-item">Firstname: {{userProfile.firstname}}</li>
+      <li class="collection-item">Lastname: {{userProfile.lastname}}</li>
+      <li class="collection-item">User Type: {{userProfile.userType}}</li>
+      <li class="collection-item">Gender: {{userProfile.gender}}</li>
     </div>
-
+</ul>
 
     <ul class="collection">
       {{#each tutorials}}
