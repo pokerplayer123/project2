@@ -39,13 +39,25 @@ Template.add.events({
     var tutorialName = target.tutorialName.value;
     var courseName = target.courseName.value;
     var password = target.password.value;
-    var owner = this.userID();
+    var startDate = target.startDate.value;
+    var endDate = target.endDate.value;
+    var startTime = target.startTime.value;
+    var endTime = target.endTime.value;
+    var capacity = target.capacity.value;
 
     // Insert tutorial into collection
     Meteor.call('tutorials.insert');
 
     // Clear form
-    target.text.value = '';
+    target.tutorialName.value = '';
+    target.courseName.value = '';
+    target.password.value = '';
+    target.startDate.value = '';
+    target.endDate.value = '',
+    target.startTime.value ='',
+    target.endTime.value = '',
+    target.capacity.value = '',
+
 
     // Close modal
     $('#addModal').modal('close');

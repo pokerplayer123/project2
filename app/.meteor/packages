@@ -22,3 +22,4 @@ materialize:materialize
 accounts-password
 useraccounts:materialize
 insecure
+kadira:flow-router
