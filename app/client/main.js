@@ -19,15 +19,7 @@ Template.body.helpers({
 });
 
 Template.body.events({
-'submit .new-Tutorial': function(event){
-  var tutorial = event.target.tutorial.value;
 
-  Tutorials.insert({
-    tutorial: tutorial,
-    createdAt: new Date()
-  });
-  return false;
-}
 });
 
 Template.add.events({
@@ -36,16 +28,30 @@ Template.add.events({
 
     // Get input value from the modal so that we can insert it into the database
     const target = event.target;
-    var tutorialName = target.tutorialName.value;
-    var courseName = target.courseName.value;
-    var password = target.password.value;
-    var owner = this.userID();
+    const tutorialName = target.tutorialName.value;
+    const courseName = target.courseName.value;
+    const password = target.password.value;
+    const owner = Meteor.userId();
+    const startDate = target.startDate.value;
+    const endDate = target.endDate.value;
+    const startTime = target.startTime.value;
+    const endTime = target.endTime.value;
 
     // Insert tutorial into collection
-    Meteor.call('tutorials.insert');
-
+    Meteor.call('tutorials.insert', {
+      tutorialName: tutorialName,
+      courseName: courseName,
+      password: password,
+      owner: owner,
+      startTime: startTime,
+      endTime: endTime,
+      startDate: startDate,
+      endDate: endDate,
+    });
     // Clear form
-    target.text.value = '';
+    target.tutorialName.value = '';
+    target.courseName.value ='';
+    target.password.value ='';
 
     // Close modal
     $('#addModal').modal('close');

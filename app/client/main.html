@@ -53,11 +53,12 @@ $(document).ready(function(){
 <template name="tutorial">
   <li class="collection-item">
     <img src="desktop/logo-unsw.png" alt="" class="circle">
-    <span class="tutorial">tutorial</span>
-    <p>First Line<br>
-      Second Line
-    </p>
-    {{text}}: <strong>Added by {{username}} </strong>
+    <span class="tutorial"><h4>{{tutorialName}}</h4></span>
+    <p><strong>Course name: </strong>{{courseName}}<br>
+    <strong>Start Time: </strong> {{startTime}}<br>
+    <strong>End Time: </strong> {{endTime}}<br>
+    <strong>Start Date: </strong> {{startDate}}<br>
+    <strong>End Date: </strong>{{endDate}}</p>
     <a href="#" class="delete-tutorial secondary-content"><i class="material-icons">close</i></a>
   </li>
 </template>
@@ -70,14 +71,12 @@ $(document).ready(function(){
       <form class="add-form">
         <input type="text" name="tutorialName" placeholder="Tutorial name...">
         <input type="text" name="courseName" placeholder="Course name...">
-        <input type="password" name="password" placeholder="Room password...">
-        <input type="password" name="confirmPassword" placeholder="Confirm password...">
+        <input type="text" name="password" placeholder="Room password...">
         <input type="date" name="startDate" placeholder="Set the start date...">
-        <input type="date" name="endTime" placeholder="Set the end date...">
+        <input type="date" name="endDate" placeholder="Set the end date...">
         <input type="time" name="startTime" placeholder="Start time...">
         <input type="time" name="endTime" placeholder="End time...">
-        <input type="int" name="capacity" placeholder="Capacity...">
-        <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+          <button class="btn waves-effect waves-light" type="submit" name="action">Submit
           <i class="material-icons right">send</i>
         </button>
       </form>
