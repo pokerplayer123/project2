@@ -21,6 +21,13 @@ Router.route('/tutorials', {
   template: 'tutorials',
 });
 
+Router.route('/tutorials/:id', {
+  template: 'tutorialDetail',
+  data: function() {
+    return Tutorials.findOne({ _id: this.params.id });
+  }
+});
+
 Router.route('/editProfile', {
   template: 'editProfile',
 });
@@ -90,6 +97,7 @@ Template.addTutorial.events({
 
 Template.tutorial.events({
   'click .delete-tutorial':function(){
+    debugger
     Meteor.call('tutorials.remove', this);
     return false;
   }

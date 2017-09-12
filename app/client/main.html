@@ -62,10 +62,8 @@
   <ul class="collection">
     {{#each tutorials}} {{> tutorial }} {{/each}}
   </ul>
-  {{else}}
-  <p>
-    {{> atForm}}
-  </p>
+
+  {{else}} {{> atForm}} {{/if}}
 
   <!-- modals -->
   {{> addTutorial}}
@@ -75,12 +73,13 @@
   <li class="collection-item">
     <img src="desktop/logo-unsw.png" alt="" class="circle">
     <span class="tutorial"><h4>{{tutorialName}}</h4></span>
-    <p><strong>Course name: </strong>{{courseName}}<br>
-      <strong>Start Time: </strong> {{startTime}}<br>
-      <strong>End Time: </strong> {{endTime}}<br>
-      <strong>Start Date: </strong> {{startDate}}<br>
-      <strong>End Date: </strong>{{endDate}}</p>
+    <strong>Course name: </strong>{{courseName}}<br>
+    <strong>Start Time: </strong> {{startTime}}<br>
+    <strong>End Time: </strong> {{endTime}}<br>
+    <strong>Start Date: </strong> {{startDate}}<br>
+    <strong>End Date: </strong>{{endDate}}
     <a href="#" class="delete-tutorial secondary-content"><i class="material-icons">close</i></a>
+    <a href="/tutorials/{{_id}}">Detail</a>
   </li>
 </template>
 
@@ -102,6 +101,18 @@
         </button>
       </form>
     </div>
+  </div>
+</template>
+
+<template name="tutorialDetail">
+  <div>
+    <img src="desktop/logo-unsw.png" alt="" class="circle">
+    <span class="tutorial"><h4>{{tutorialName}}</h4></span>
+    <strong>Course name: </strong>{{courseName}}<br>
+    <strong>Start Time: </strong> {{startTime}}<br>
+    <strong>End Time: </strong> {{endTime}}<br>
+    <strong>Start Date: </strong> {{startDate}}<br>
+    <strong>End Date: </strong>{{endDate}}
   </div>
 </template>
 
