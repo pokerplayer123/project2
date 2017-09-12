@@ -7,7 +7,15 @@
   {{ >nav }}
 
   <div class="container">
+    {{#if currentUser}}
+    <!-- -->
     {{> yield }}
+    <!-- -->
+    {{else}}
+    <!-- -->
+    {{> atForm}}
+    <!-- -->
+    {{/if}}
   </div>
 
   <script>
@@ -49,7 +57,6 @@
 </template>
 
 <template name="tutorials">
-  {{#if currentUser}}
   <h4>My Tutorials</h4>
 
   {{#if isTutor}}
@@ -58,12 +65,9 @@
   </div>
   {{/if}}
 
-
   <ul class="collection">
     {{#each tutorials}} {{> tutorial }} {{/each}}
   </ul>
-
-  {{else}} {{> atForm}} {{/if}}
 
   <!-- modals -->
   {{> addTutorial}}

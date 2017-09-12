@@ -24,6 +24,7 @@ var myPostSubmitFunc = function (userId, info) {
 
 // myLogoutFunction
 var myLogoutFunc = function () {
+  Router.go('/');
   console.log('Logged out');
 }
 
@@ -139,4 +140,12 @@ AccountsTemplates.configure({
       loginForbidden: "error.accounts.Login failed"
     },
   },
+});
+
+AccountsTemplates.configureRoute('signIn', {
+  redirect: function(){
+      var user = Meteor.user();
+      if (user)
+        Router.go('/tutorials');
+  }
 });
