@@ -1,69 +1,90 @@
 <head>
   <title>Tutorial Helper</title>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 
-<body>
-  <nav class="amber">
-    <div class="container">
-      <div class="nav-wrapper">
-        <a href="#" class="brand-logo">Tutorial Helper</a>
-        <ul id="nav-mobile" class="right hide-on-med-and-down">
-          {{#if currentUser}}
-            <li class="nav-item">
-            <!-- Modal Trigger -->
-            <a class="waves-effect waves-light btn modal-trigger" href="#addModal">Add Tutorial</a>
+<template name="layout">
+  {{ >nav }}
 
-            <a class="waves-effect waves-light btn modal-trigger" href="#editProfile">Edit Profile</a>
-        </li>
+  <div class="container">
+    {{> yield }}
+  </div>
+
+  <script>
+    $(document).ready(function () {
+      $(".button-collapse").sideNav();
+      $(".dropdown-button").dropdown();
+      $('.modal').modal();
+    });
+  </script>
+</template>
+
+<template name="nav">
+
+  <nav class="amber nav-extended">
+    <div class="nav-wrapper">
+      <a href="#" class="brand-logo">&nbsp;&nbsp;Tutorial Helper&nbsp;&nbsp;</a>
+      <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        {{#if currentUser}}
+        <li><a href="/">Tutorials</a></li>
+        <li><a href="/editProfile">Edit Profile</a></li>
         {{/if}}
-        <li class="nav-item">
-            {{> atNavButton}}
-      </li>
-        </ul>
-      </div>
+        <li>
+          {{> atNavButton}}
+        </li>
+      </ul>
+      <ul class="side-nav" id="mobile-demo">
+        {{#if currentUser}}
+        <li><a href="/">Tutorials</a></li>
+        <li><a href="/editProfile">Edit Profile</a></li>
+        {{/if}}
+        <li>
+          {{> atNavButton}}
+        </li>
+      </ul>
     </div>
   </nav>
-  <div class="container">
+
+</template>
+
+<template name="tutorials">
   {{#if currentUser}}
-    <h1>My Tutorials</h1>
-    <ul class="collection">
-      {{#each tutorials}}
-        {{> tutorial}}
-        {{/each}}
+  <h4>My Tutorials</h4>
+
+  {{#if isTutor}}
+  <div class="right-align">
+    <a class="waves-effect waves-light btn modal-trigger" href="#addModal">Add Tutorial</a>
+  </div>
+  {{/if}}
+
+
+  <ul class="collection">
+    {{#each tutorials}} {{> tutorial }} {{/each}}
   </ul>
   {{else}}
-<p>
+  <p>
     {{> atForm}}
-</p>
-{{/if}}
-</div>
-{{> add}}
-{{> editProfile}}
+  </p>
 
-<script>
-$(document).ready(function(){
-    // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
-    $('.modal').modal();
-    // $('select').material_select();
-  });
-</script>
-</body>
+  <!-- modals -->
+  {{> addTutorial}}
+</template>
 
 <template name="tutorial">
   <li class="collection-item">
     <img src="desktop/logo-unsw.png" alt="" class="circle">
     <span class="tutorial"><h4>{{tutorialName}}</h4></span>
     <p><strong>Course name: </strong>{{courseName}}<br>
-    <strong>Start Time: </strong> {{startTime}}<br>
-    <strong>End Time: </strong> {{endTime}}<br>
-    <strong>Start Date: </strong> {{startDate}}<br>
-    <strong>End Date: </strong>{{endDate}}</p>
+      <strong>Start Time: </strong> {{startTime}}<br>
+      <strong>End Time: </strong> {{endTime}}<br>
+      <strong>Start Date: </strong> {{startDate}}<br>
+      <strong>End Date: </strong>{{endDate}}</p>
     <a href="#" class="delete-tutorial secondary-content"><i class="material-icons">close</i></a>
   </li>
 </template>
 
-<template name = "add">
+<template name="addTutorial">
   <!--Modal Structure -->
   <div id="addModal" class="modal">
     <div class="modal-content">
@@ -76,7 +97,7 @@ $(document).ready(function(){
         <input type="date" name="endDate" placeholder="Set the end date...">
         <input type="time" name="startTime" placeholder="Start time...">
         <input type="time" name="endTime" placeholder="End time...">
-          <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+        <button class="btn waves-effect waves-light" type="submit" name="action">Submit
           <i class="material-icons right">send</i>
         </button>
       </form>
@@ -84,9 +105,9 @@ $(document).ready(function(){
   </div>
 </template>
 
-<template name = "editProfile">
+<template name="editProfile">
   <!--Modal Structure -->
-  <div id="editProfile" class="modal">
+  <div id="editProfile" class="">
     <div class="modal-content">
       <h4>Edit Profile</h4>
       <form class="edit-profile-form">
@@ -100,11 +121,6 @@ $(document).ready(function(){
         <select name="gender" style="display: block">
           <option value="male" {{compareGender 'male'}}>Male</option>
           <option value="female" {{compareGender 'female'}}>Female</option>
-        </select>
-        <label>User Type</label>
-        <select name="userType" style="display: block">
-          <option value="tutor" {{compareUserType 'tutor'}}>Tutor</option>
-          <option value="student" {{compareUserType 'student'}}>Student</option>
         </select>
         <br>
         <button class="btn waves-effect waves-light" type="submit" name="action">Submit

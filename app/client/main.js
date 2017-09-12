@@ -4,9 +4,42 @@ import { Accounts } from 'meteor/accounts-base';
 
 import './main.html';
 
-Template.body.helpers({
+/**
+ * Router Configuration Starts
+ */
+Router.configure({
+  layoutTemplate: 'layout'
+});
+
+Router.route('/', {
+  template: 'tutorials',
+  data: function() {
+  }
+});
+
+Router.route('/tutorials', {
+  template: 'tutorials',
+});
+
+Router.route('/editProfile', {
+  template: 'editProfile',
+});
+
+
+/**
+ * For Each template, binding javascripts
+ */
+Template.tutorials.helpers({
   tutorials:function(){
     return Tutorials.find({});
+  },
+
+  isStudent: function() {
+    return getLoginUserProfile().userType == 'student';
+  },
+
+  isTutor: function() {
+    return getLoginUserProfile().userType == 'tutor';
   },
 
   userProfile: function() {
@@ -18,11 +51,7 @@ Template.body.helpers({
   }
 });
 
-Template.body.events({
-
-});
-
-Template.add.events({
+Template.addTutorial.events({
   'submit .add-form': function(){
     event.preventDefault();
 
@@ -55,7 +84,6 @@ Template.add.events({
 
     // Close modal
     $('#addModal').modal('close');
-
     return false;
   }
 });
@@ -79,7 +107,7 @@ Template.atNavButton.events({
 
 Template.editProfile.helpers({
   userProfile: function() {
-    return Meteor.user().profile;
+    return Meteor.user() ? Meteor.user().profile : {};
   },
 
   userEmail: function() {
@@ -87,12 +115,12 @@ Template.editProfile.helpers({
   },
 
   compareGender: function(target) {
-    var profile = Meteor.user().profile;
+    var profile = Meteor.user() ? Meteor.user().profile : {};
     return profile.gender == target ? 'selected' : '';
   },
 
   compareUserType: function(target) {
-    var profile = Meteor.user().profile;
+    var profile = Meteor.user() ? Meteor.user().profile : {};
     return profile.userType == target ? 'selected' : '';
   },
 
@@ -100,13 +128,18 @@ Template.editProfile.helpers({
 
 Template.editProfile.events({
   'submit form': function(e){
+    e.preventDefault();
     var form = $(e.target);
     var newProfile = objectifyForm(form.serializeArray());
     Meteor.users.update({_id: Meteor.userId()}, {$set: {profile: newProfile}});
-    $('#editProfile').modal('close');
+    // $('#editProfile').modal('close');
     return false;
   }
 });
+
+function getLoginUserProfile() {
+  return Meteor.user() ? Meteor.user().profile : {};
+}
 
 function objectifyForm(formArray) {//serialize data function
   var returnArray = {};
