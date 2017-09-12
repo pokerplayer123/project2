@@ -95,6 +95,12 @@ Template.addTutorial.events({
   }
 });
 
+Template.tutorial.helpers({
+  isOwner: function() {
+    return this.owner == Meteor.user()._id;
+  }
+});
+
 Template.tutorial.events({
   'click .delete-tutorial':function(){
     debugger

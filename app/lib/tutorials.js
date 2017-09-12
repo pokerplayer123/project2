@@ -7,13 +7,13 @@ export const Tutorials = new Mongo.Collection('tutorials');
 //methods that can be accessed by both client and server
 Meteor.methods({
   'tutorials.insert'(tutorialDetails) {
-    var tutorialID = Tutorials.insert(tutorialDetails);
-    return tutorialID;
-
     // Check if user is logged in
     if (!Meteor.userId()) {
       throw new Meteor.Error('not-authorized');
     }
+
+    var tutorialID = Tutorials.insert(tutorialDetails);
+    return tutorialID;
   },
   //method for inserting tutorial objects into the database
   'tutorials.remove'(tutorial) {
