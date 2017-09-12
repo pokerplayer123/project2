@@ -1,5 +1,6 @@
 import { Template } from 'meteor/templating';
 import { Tutorials } from '../lib/tutorials.js';
+import { Requests } from '../lib/requests.js';
 import { Accounts } from 'meteor/accounts-base';
 
 import './main.html';
@@ -13,7 +14,7 @@ Router.configure({
 
 Router.route('/', {
   template: 'tutorials',
-  data: function() {
+  data: function () {
   }
 });
 
@@ -27,7 +28,7 @@ Router.route('/tutorials/add', {
 
 Router.route('/tutorials/:id', {
   template: 'tutorialDetail',
-  data: function() {
+  data: function () {
     return Tutorials.findOne({ _id: this.params.id });
   }
 });
@@ -40,31 +41,42 @@ Router.route('/editProfile', {
 /**
  * For Each template, binding javascripts
  */
+// -----------------------------------------
+// templte tutorials start
+// -----------------------------------------
+
 Template.tutorials.helpers({
-  tutorials:function(){
+  tutorials: function () {
     return Tutorials.find({});
   },
 
-  isStudent: function() {
+  isStudent: function () {
     return getLoginUserProfile().userType == 'student';
   },
 
-  isTutor: function() {
+  isTutor: function () {
     return getLoginUserProfile().userType == 'tutor';
   },
 
-  userProfile: function() {
+  userProfile: function () {
     return Meteor.user().profile;
   },
 
-  userEmail: function() {
+  userEmail: function () {
     return Meteor.user().emails ? Meteor.user().emails[0].address : null;
   }
 });
 
+// -----------------------------------------
+// templte tutorials end
+// -----------------------------------------
+
+// -----------------------------------------
+// templte addTutorial start
+// -----------------------------------------
 
 Template.addTutorial.events({
-  'submit .add-form': function(){
+  'submit .add-form': function () {
     event.preventDefault();
 
     // Get input value from the modal so that we can insert it into the database
@@ -91,8 +103,8 @@ Template.addTutorial.events({
     });
     // Clear form
     target.tutorialName.value = '';
-    target.courseName.value ='';
-    target.password.value ='';
+    target.courseName.value = '';
+    target.password.value = '';
 
     // Close modal
     // $('#addModal').modal('close');
@@ -101,45 +113,113 @@ Template.addTutorial.events({
   }
 });
 
+// -----------------------------------------
+// templte addTutorial end
+// -----------------------------------------
+
+
+// -----------------------------------------
+// templte tutorial start
+// -----------------------------------------
+
 Template.tutorial.helpers({
-  isOwner: function() {
+  isOwner: function () {
     return this.owner == Meteor.user()._id;
   }
 });
 
 Template.tutorial.events({
-  'click .delete-tutorial':function(){
+  'click .delete-tutorial': function () {
     debugger
     Meteor.call('tutorials.remove', this);
     return false;
   }
 });
 
+// -----------------------------------------
+// templte tutorial end
+// -----------------------------------------
+
 Template.atNavButton.events({
-  'click .login-toggle': ()=> {
+  'click .login-toggle': () => {
     Session.set('nav-toggle', 'open');
   },
-  'click .logout': ()=> {
+  'click .logout': () => {
     AccountsTemplates.logout();
   }
 })
 
+// -----------------------------------------
+// templte tutorialDetail start
+// -----------------------------------------
+Template.tutorialDetail.helpers({
+  'requests': function() {
+    return Requests.find({tutorialId: this._id}, {sorted: {createdAt: -1}});
+  },
 
+});
+
+Template.tutorialDetail.events({
+  'click #create-request': function (e) {
+    e.preventDefault();
+    var modal = $('#create-request-modal');
+    modal.modal();
+    modal.modal('open');
+  },
+
+  'submit #create-request-form': function (e) {
+    e.preventDefault();
+    var form = $(e.target);
+    var modal = $('#create-request-modal');
+    var request = objectifyForm(form.serializeArray());
+    request = Object.assign(request, {
+      createdAt: new Date,
+      owner: Meteor.user()._id,
+      ownerZid: getLoginUserProfile().zid,
+      tutorialId: this._id
+    });
+    
+    Meteor.call('requests.insert', request);
+    modal.modal('close');
+  },
+
+});
+
+Template.requestItem.helpers({
+  'isReqiestOwner': function() {
+    debugger
+    return this.owner == Meteor.user()._id;
+  }
+});
+
+Template.requestItem.events({
+  'click .delete-request': function(e) {
+    Meteor.call('requests.remove', this);
+  }
+});
+
+// -----------------------------------------
+// templte tutorialDetail end
+// -----------------------------------------
+
+// -----------------------------------------
+// templte editProfile Start
+// -----------------------------------------
 Template.editProfile.helpers({
-  userProfile: function() {
+  userProfile: function () {
     return Meteor.user() ? Meteor.user().profile : {};
   },
 
-  userEmail: function() {
+  userEmail: function () {
     return Meteor.user().emails ? Meteor.user().emails[0].address : null;
   },
 
-  compareGender: function(target) {
+  compareGender: function (target) {
     var profile = Meteor.user() ? Meteor.user().profile : {};
     return profile.gender == target ? 'selected' : '';
   },
 
-  compareUserType: function(target) {
+  compareUserType: function (target) {
     var profile = Meteor.user() ? Meteor.user().profile : {};
     return profile.userType == target ? 'selected' : '';
   },
@@ -147,15 +227,20 @@ Template.editProfile.helpers({
 });
 
 Template.editProfile.events({
-  'submit form': function(e){
+  'submit form': function (e) {
     e.preventDefault();
     var form = $(e.target);
     var newProfile = objectifyForm(form.serializeArray());
-    Meteor.users.update({_id: Meteor.userId()}, {$set: {profile: newProfile}});
+    Meteor.users.update({ _id: Meteor.userId() }, { $set: { profile: newProfile } });
     // $('#editProfile').modal('close');
     return false;
   }
 });
+
+// -----------------------------------------
+// templte editProfile end
+// -----------------------------------------
+
 
 function getLoginUserProfile() {
   return Meteor.user() ? Meteor.user().profile : {};
@@ -163,7 +248,7 @@ function getLoginUserProfile() {
 
 function objectifyForm(formArray) {//serialize data function
   var returnArray = {};
-  for (var i = 0; i < formArray.length; i++){
+  for (var i = 0; i < formArray.length; i++) {
     returnArray[formArray[i]['name']] = formArray[i]['value'];
   }
   return returnArray;

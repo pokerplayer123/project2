@@ -22,7 +22,7 @@
     $(document).ready(function () {
       $(".button-collapse").sideNav();
       $(".dropdown-button").dropdown();
-      $('.modal').modal();
+      // $('.modal').modal();
     });
   </script>
 </template>
@@ -95,10 +95,8 @@
         </dl>
       </div>
       <div class="card-action">
-        <a class="btn" href="/tutorials/{{_id}}">Detail</a>
-        {{#if isOwner}}
-        <a class="delete-tutorial btn red"><i class="material-icons">delete</i></a>
-        {{/if}}
+        <a class="btn" href="/tutorials/{{_id}}">Detail</a> {{#if isOwner}}
+        <a class="delete-tutorial btn red"><i class="material-icons">delete</i></a> {{/if}}
       </div>
     </div>
   </div>
@@ -157,9 +155,68 @@
     </div>
     <div class="col s12 m7 l8">
 
+      <h4>Request List</h4>
+      <div class="right-align">
+        <a class="btn waves-effect waves-light btn modal-trigger" id="create-request" href="#create-request-modal">New Request</a>
+      </div>
+
+      <br>
+      <ul class="collapsible" data-collapsible="expandable">
+
+        {{#each requests}} {{> requestItem}} {{/each}}
+
+      </ul>
     </div>
   </div>
 
+  <div id="create-request-modal" class="modal">
+    <form id="create-request-form">
+      <div class="modal-content">
+        <h4>Create New Request</h4>
+        <div class="row">
+          <div class="input-field col s12">
+            <input id="question" name="question" type="text" required>
+            <label for="question">Question</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <textarea id="desc" name="desc" class="materialize-textarea" required></textarea>
+            <label for="desc">Issue Description</label>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <a class="modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+        <button type="submit" id="submit-request" class="modal-action waves-effect waves-green btn-flat">Submit</button>
+      </div>
+    </form>
+  </div>
+
+  <script>
+    $('.collapsible').collapsible();
+  </script>
+</template>
+
+<template name="requestItem">
+  <li style="position: relative">
+    <!-- {{#if isRequestOwner }} -->
+    <a class="btn-floating red delete-request" style="position: absolute; right: -20px; top: -20px; transform: scale(0.5); -webkit-transform: scale(0.5);">  <i class="material-icons">close</i></a>
+    <!-- -->
+    <!-- {{/if}} -->
+    <div class="collapsible-header">
+      <i class="material-icons">question_answer</i>
+      <span><b>{{question}}</b></span>
+      <span style="flex-grow: 1;"></span>
+      <span>(zid: {{ownerZid}})</span>
+    </div>
+    <div class="collapsible-body" style="padding: 0.5rem 1rem">
+      <p>
+        <b>Description:</b>
+        <br> {{desc}}
+      </p>
+    </div>
+  </li>
 </template>
 
 <template name="editProfile">
