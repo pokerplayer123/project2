@@ -61,16 +61,13 @@
 
   {{#if isTutor}}
   <div class="right-align">
-    <a class="waves-effect waves-light btn modal-trigger" href="#addModal">Add Tutorial</a>
+    <a class="waves-effect waves-light btn modal-trigger" href="/tutorials/add">Add Tutorial</a>
   </div>
   {{/if}}
 
   <div class="row">
     {{#each tutorials}} {{> tutorial }} {{/each}}
   </div>
-
-  <!-- modals -->
-  {{> addTutorial}}
 </template>
 
 <template name="tutorial">
@@ -110,9 +107,9 @@
 
 <template name="addTutorial">
   <!--Modal Structure -->
-  <div id="addModal" class="modal">
+  <div id="addModal" class="">
     <div class="modal-content">
-      <h4>Add Tutorial</h4>
+      <h4>Create Tutorial</h4>
       <form class="add-form">
         <input type="text" name="tutorialName" placeholder="Tutorial name...">
         <input type="text" name="courseName" placeholder="Course name...">

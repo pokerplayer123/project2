@@ -21,6 +21,10 @@ Router.route('/tutorials', {
   template: 'tutorials',
 });
 
+Router.route('/tutorials/add', {
+  template: 'addTutorial',
+});
+
 Router.route('/tutorials/:id', {
   template: 'tutorialDetail',
   data: function() {
@@ -58,6 +62,7 @@ Template.tutorials.helpers({
   }
 });
 
+
 Template.addTutorial.events({
   'submit .add-form': function(){
     event.preventDefault();
@@ -90,7 +95,8 @@ Template.addTutorial.events({
     target.password.value ='';
 
     // Close modal
-    $('#addModal').modal('close');
+    // $('#addModal').modal('close');
+    Router.go('/tutorials');
     return false;
   }
 });
