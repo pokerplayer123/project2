@@ -97,14 +97,14 @@ AccountsTemplates.addFields([
 
   // {
   //   _id: "consultationStart",
-  //   type: "time",
+  //   type: "text",
   //   displayName: "Consultation Time Start",
   //   required: false,
   // },
 
   // {
   //   _id: "consultationEnd",
-  //   type: "time",
+  //   type: "text",
   //   displayName: "Consultation Time End",
   //   required: false,
   // },

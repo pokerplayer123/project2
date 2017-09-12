@@ -1,5 +1,10 @@
 <head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
   <title>Tutorial Helper</title>
+
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 
@@ -31,7 +36,7 @@
 
   <nav class="amber nav-extended">
     <div class="nav-wrapper">
-      <a href="#" class="brand-logo">&nbsp;&nbsp;Tutorial Helper&nbsp;&nbsp;</a>
+      <a href="/" class="brand-logo">&nbsp;&nbsp;Tutorial Helper&nbsp;&nbsp;</a>
       <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
       <ul id="nav-mobile" class="right hide-on-med-and-down">
         {{#if currentUser}}
@@ -64,7 +69,7 @@
     <a class="waves-effect waves-light btn modal-trigger" href="/tutorials/add">Add Tutorial</a>
   </div>
   {{/if}}
-
+  <br>
   <div class="row">
     {{#each tutorials}} {{> tutorial }} {{/each}}
   </div>
@@ -155,17 +160,20 @@
     </div>
     <div class="col s12 m7 l8">
 
+
       <h4>Request List</h4>
       <div class="right-align">
         <a class="btn waves-effect waves-light btn modal-trigger" id="create-request" href="#create-request-modal">New Request</a>
       </div>
 
-      <br>
+      <br> {{#if hasRequests}}
       <ul class="collapsible" data-collapsible="expandable">
-
         {{#each requests}} {{> requestItem}} {{/each}}
-
       </ul>
+      {{else}}
+      <p>There is no requests yet.</p>
+      {{/if}}
+
     </div>
   </div>
 
@@ -208,16 +216,16 @@
       <i class="material-icons">question_answer</i>
       <span><b>{{question}}</b></span>
       <span style="flex-grow: 1;"></span>
-      <span style="margin-right: 10px">(zid: {{ownerZid}})</span>
+      <span>{{ownerZid}}</span>
+      <span class="date-label">{{fromNow}}</span>
     </div>
     <div class="collapsible-body" style="padding: 0.5rem 1rem">
       <p>
-        <b>Description:</b>
-        <br> {{desc}}
+        <b>Owner zID:</b> {{ownerZid}}
       </p>
       <p>
-        <b>Created:</b>
-        <br> {{createdAt}}
+        <b>Description:</b>
+        <br> {{desc}}
       </p>
     </div>
   </li>
@@ -242,6 +250,16 @@
           <option value="male" {{compareGender 'male'}}>Male</option>
           <option value="female" {{compareGender 'female'}}>Female</option>
         </select>
+        <!--  -->
+        {{#if isTutor}}
+        <!--  -->
+        <label>Consultation Start Time</label>
+        <input type="time" name="consultationStart" value="{{userProfile.consultationStart}}" placeholder="Consultation Start Time">
+        <label>Consultation End Time</label>
+        <input type="time" name="consultationEnd" value="{{userProfile.consultationEnd}}" placeholder="Consultation End Time">
+        <!--  -->
+        {{/if}}
+        <!--  -->
         <br>
         <button class="btn waves-effect waves-light" type="submit" name="action">Submit
           <i class="material-icons right">send</i>

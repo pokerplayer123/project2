@@ -130,9 +130,10 @@ Template.tutorial.helpers({
 
 Template.tutorial.events({
   'click .delete-tutorial': function () {
-    debugger
-    Meteor.call('tutorials.remove', this);
-    return false;
+    var r = confirm("Do you want to delete this tutorial?");
+    if (r == true) {
+      Meteor.call('tutorials.remove', this);
+    }
   }
 });
 
@@ -153,9 +154,12 @@ Template.atNavButton.events({
 // templte tutorialDetail start
 // -----------------------------------------
 Template.tutorialDetail.helpers({
-  'requests': function() {
-    return Requests.find({tutorialId: this._id}, {sorted: {createdAt: -1}});
+  'requests': function () {
+    return Requests.find({ tutorialId: this._id }, { sorted: { createdAt: -1 } });
   },
+  'hasRequests': function () {
+    return Requests.find({ tutorialId: this._id }).count() > 0;
+  }
 
 });
 
@@ -178,7 +182,7 @@ Template.tutorialDetail.events({
       ownerZid: getLoginUserProfile().zid,
       tutorialId: this._id
     });
-    
+
     Meteor.call('requests.insert', request);
     modal.modal('close');
   },
@@ -186,13 +190,16 @@ Template.tutorialDetail.events({
 });
 
 Template.requestItem.helpers({
-  'isRequestOwner': function() {
+  'isRequestOwner': function () {
     return this.owner == Meteor.user()._id;
+  },
+  'fromNow': function () {
+    return moment(this.createdAt).fromNow();
   }
 });
 
 Template.requestItem.events({
-  'click .delete-request': function(e) {
+  'click .delete-request': function (e) {
     var r = confirm("Do you want to delete this request?");
     if (r == true) {
       Meteor.call('requests.remove', this);
@@ -216,6 +223,10 @@ Template.editProfile.helpers({
     return Meteor.user().emails ? Meteor.user().emails[0].address : null;
   },
 
+  isTutor: function () {
+    return getLoginUserProfile().userType == 'tutor';
+  },
+
   compareGender: function (target) {
     var profile = Meteor.user() ? Meteor.user().profile : {};
     return profile.gender == target ? 'selected' : '';
@@ -232,7 +243,8 @@ Template.editProfile.events({
   'submit form': function (e) {
     e.preventDefault();
     var form = $(e.target);
-    var newProfile = objectifyForm(form.serializeArray());
+    var oldProfile = getLoginUserProfile();
+    var newProfile = Object.assign(oldProfile, objectifyForm(form.serializeArray()));
     Meteor.users.update({ _id: Meteor.userId() }, { $set: { profile: newProfile } });
     // $('#editProfile').modal('close');
     return false;
