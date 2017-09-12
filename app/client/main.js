@@ -186,15 +186,17 @@ Template.tutorialDetail.events({
 });
 
 Template.requestItem.helpers({
-  'isReqiestOwner': function() {
-    debugger
+  'isRequestOwner': function() {
     return this.owner == Meteor.user()._id;
   }
 });
 
 Template.requestItem.events({
   'click .delete-request': function(e) {
-    Meteor.call('requests.remove', this);
+    var r = confirm("Do you want to delete this request?");
+    if (r == true) {
+      Meteor.call('requests.remove', this);
+    }
   }
 });
 

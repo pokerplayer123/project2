@@ -200,20 +200,24 @@
 
 <template name="requestItem">
   <li style="position: relative">
-    <!-- {{#if isRequestOwner }} -->
-    <a class="btn-floating red delete-request" style="position: absolute; right: -20px; top: -20px; transform: scale(0.5); -webkit-transform: scale(0.5);">  <i class="material-icons">close</i></a>
+    {{#if isRequestOwner }}
+    <a class="btn-floating red delete-request"> <i class="material-icons">close</i></a>
     <!-- -->
-    <!-- {{/if}} -->
+    {{/if}}
     <div class="collapsible-header">
       <i class="material-icons">question_answer</i>
       <span><b>{{question}}</b></span>
       <span style="flex-grow: 1;"></span>
-      <span>(zid: {{ownerZid}})</span>
+      <span style="margin-right: 10px">(zid: {{ownerZid}})</span>
     </div>
     <div class="collapsible-body" style="padding: 0.5rem 1rem">
       <p>
         <b>Description:</b>
         <br> {{desc}}
+      </p>
+      <p>
+        <b>Created:</b>
+        <br> {{createdAt}}
       </p>
     </div>
   </li>
@@ -231,6 +235,8 @@
         <input type="text" name="firstname" value="{{userProfile.firstname}}" placeholder="firstname">
         <label>Lastname</label>
         <input type="text" name="lastname" value="{{userProfile.lastname}}" placeholder="lastname">
+        <label>Degree</label>
+        <input type="text" name="degree" value="{{userProfile.degree}}" placeholder="degree">
         <label>Gender</label>
         <select name="gender" style="display: block">
           <option value="male" {{compareGender 'male'}}>Male</option>

@@ -54,6 +54,13 @@ AccountsTemplates.addFields([
   },
 
   {
+    _id: "degree",
+    type: "text",
+    displayName: "Degree",
+    required: true,
+  },
+
+  {
 
     _id: "gender",
     type: "select",
@@ -86,7 +93,23 @@ AccountsTemplates.addFields([
       },
     ],
     required: true,
-  }]);
+  },
+
+  // {
+  //   _id: "consultationStart",
+  //   type: "time",
+  //   displayName: "Consultation Time Start",
+  //   required: false,
+  // },
+
+  // {
+  //   _id: "consultationEnd",
+  //   type: "time",
+  //   displayName: "Consultation Time End",
+  //   required: false,
+  // },
+
+]);
 
 
 AccountsTemplates.configure({
