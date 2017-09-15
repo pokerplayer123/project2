@@ -21,3 +21,5 @@ materialize:materialize
 accounts-password
 useraccounts:materialize
 insecure
+iron:router
+momentjs:moment
