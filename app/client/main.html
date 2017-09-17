@@ -61,6 +61,18 @@
 
 </template>
 
+<template name="search">
+        <div class="nav-wrapper">
+          <form>
+            <div class="input-field">
+              <input id="search" type="search" required>
+              <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+              <i class="material-icons">close</i>
+            </div>
+          </form>
+        </div>
+</template>
+
 <template name="tutorials">
   <h4>Tutorials</h4>
 
@@ -70,6 +82,13 @@
   </div>
   {{/if}}
   <br>
+  <form>
+      <div class="input-field">
+        <input id="search" type="search" required>
+        <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+        <i class="material-icons">close</i>
+      </div>
+    </form>
   <div class="row">
     {{#each tutorials}} {{> tutorial }} {{/each}}
   </div>
@@ -100,6 +119,7 @@
         </dl>
       </div>
       <div class="card-action">
+        <a class="waves-effect waves-light btn">Join</a>
         <a class="btn" href="/tutorials/{{_id}}">Detail</a> {{#if isOwner}}
         <a class="delete-tutorial btn red"><i class="material-icons">delete</i></a> {{/if}}
       </div>
