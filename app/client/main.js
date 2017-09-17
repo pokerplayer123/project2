@@ -11,7 +11,7 @@ import './main.html';
 
 Router.route('/', function () {
   this.render('Home', {
-    data: function () { return Items.findOne({_id: this.params._id}); }
+    data: function () { return Items.findOne({tutorials}); }
   });
 });
 
