@@ -1,5 +1,9 @@
 /* CSS declarations go here */
 
+input[type="search"]{
+    height: 96px !important;
+}
+
 action.button {
     position: relative;
 }

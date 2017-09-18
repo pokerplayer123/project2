@@ -8,6 +8,14 @@ import './main.html';
 /**
  * Router Configuration Starts
  */
+
+Router.route('/search/', function () {
+  this.render('search', {
+    data: function () { return Items.findOne({tutorialName}); }
+  });
+});
+    
+
 Router.configure({
   layoutTemplate: 'layout'
 });
@@ -267,3 +275,59 @@ function objectifyForm(formArray) {//serialize data function
   }
   return returnArray;
 }
+
+// -----------------------------------------
+// templte search tutorial start
+// -----------------------------------------
+
+Tracker.autorun(function(){
+  let cursor = TutorialsIndex.search('input')
+
+  console.log(cursor.fetch())
+  console.log(cursor.count())
+})
+
+Tracker.autorun(function(){
+  console.log(TutorialsIndex.search('input', {limit:5, skip:10}).fetch())
+});
+
+
+/*Template.search.onCreated(()=> {
+  let template = Template.instance();
+  template.searchQuery = new ReactiveVar();
+  template.searching = new ReactiveVar(false);
+
+  template.autorun(()=>{
+    template.subscribe('tutorials', template.searchQuery.get(), () => {
+      setTimeout(()=> {
+        template.searching.set(false);
+      },300);
+    });
+  });
+});
+
+Template.search.helpers({
+  searching(){
+    return Template.instance().searching.get();
+  },
+  query(){
+    return Template.instance().searchQuery.get();
+  },
+  tutorials(){
+    let tutorials = Tutorials.find();
+    if(tutorials){
+      return tutorials;
+    }
+  }
+})
+
+Template.search.events({
+  'keyup [tutorialName="search"]' (event, template){
+    let value = event.target.value();
+
+    if (value!== '' && event.keycode===13){
+      template.searchQuery.set(value);
+      template.searching.set
+    }
+  }
+})*/
