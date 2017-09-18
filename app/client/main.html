@@ -63,16 +63,16 @@
 
 <template name="tutorials">
   <h4>Tutorials</h4>
-
-  {{#if isTutor}}
-  <div class="right-align">
-    <a class="waves-effect waves-light btn modal-trigger" href="/tutorials/add">Add Tutorial</a>
-  </div>
-  {{/if}}
   <br>
   <div class="row">
     {{#each tutorials}} {{> tutorial }} {{/each}}
   </div>
+  {{#if isTutor}}
+  <div class="col s12 m6 13 right">
+    <a class="btn-floating btn-large waves-effect waves-light align-right modal-trigger" href="/tutorials/add"><i class="material-icons">
+      add</i></a>
+    </div>
+  {{/if}}
 </template>
 
 <template name="tutorial">
