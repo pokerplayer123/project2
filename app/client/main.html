@@ -62,15 +62,19 @@
 </template>
 
 <template name="search">
-        <div class="nav-wrapper">
-          <form>
-            <div class="input-field">
-              <input id="search" type="search" required>
-              <label class="label-icon" for="search"><i class="material-icons">search</i></label>
-              <i class="material-icons">close</i>
-            </div>
-          </form>
-        </div>
+  {{> EasySearch.Input index=tutorialsIndex}}
+
+  <ul>
+    {{#EasySearch.Each index=tutorialsIndex}}
+      <li>Name of the player: {{tutorialName}} </li>
+    {{/EasySearch.Each}}
+  </ul>
+
+  {{> EasySearch.LoadMore index=tutorialsIndex}}
+
+  {{#EasySearch.IfNoResults index=tutorialsIndex}}
+    <div class="no-results">No results found!</div>
+  {{/EasySearch.IfNoResults}}
 </template>
 
 <template name="tutorials">

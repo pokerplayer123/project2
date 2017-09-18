@@ -33,7 +33,7 @@ Meteor.methods({
   }
 });
 
-Meteor.publish('tutorials', function(search){
+/*Meteor.publish('tutorials', function(search){
 check(search, Match.OneOf(String, null, undefined));
 
 let query = {},
@@ -50,4 +50,4 @@ let query = {},
     projection.limit = 100;
   }
   return Tutorials.find(query, projection);
-});
+});*/

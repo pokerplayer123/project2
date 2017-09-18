@@ -9,11 +9,12 @@ import './main.html';
  * Router Configuration Starts
  */
 
-Router.route('/', function () {
-  this.render('Home', {
-    data: function () { return Items.findOne({tutorials}); }
+Router.route('/search/', function () {
+  this.render('search', {
+    data: function () { return Items.findOne({tutorialName}); }
   });
 });
+    
 
 Router.configure({
   layoutTemplate: 'layout'
@@ -279,7 +280,7 @@ function objectifyForm(formArray) {//serialize data function
 // templte search tutorial start
 // -----------------------------------------
 
-/*Tracker.autorun(function(){
+Tracker.autorun(function(){
   let cursor = TutorialsIndex.search('input')
 
   console.log(cursor.fetch())
@@ -289,9 +290,9 @@ function objectifyForm(formArray) {//serialize data function
 Tracker.autorun(function(){
   console.log(TutorialsIndex.search('input', {limit:5, skip:10}).fetch())
 });
-*/
 
-Template.search.onCreated(()=> {
+
+/*Template.search.onCreated(()=> {
   let template = Template.instance();
   template.searchQuery = new ReactiveVar();
   template.searching = new ReactiveVar(false);
@@ -326,11 +327,7 @@ Template.search.events({
 
     if (value!== '' && event.keycode===13){
       template.searchQuery.set(value);
-      template.searching.set(true);
-    }
-
-    if(value === ''){
-      template.searchQuery.set(value);
+      template.searching.set
     }
   }
-});
+})*/
