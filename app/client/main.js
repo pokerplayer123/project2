@@ -51,6 +51,10 @@ Router.route('/joinTutorial',{
   template: 'passwordForm',
 });
 
+Router.route('/passwordForm',{
+  template: 'tutorialDetail',
+});
+
 
 /**
  * For Each template, binding javascripts
@@ -346,15 +350,12 @@ Template.search.events({
 // templte join tutorial start
 // -----------------------------------------
 
-Template.joinTutorial.helpers({
-  'join': function () {
-    if(inputPassword.value.match(password))   
-    {   
-      return tutorialDetail;  
-    }  
-    else  
-    {   
-    alert('Wrong...!')  
-    }  
-}
+Template.passwordForm.events({
+  'click .waves-effect waves-light btn': function(){
+    if(inputPassword = password.addTutorial ) {
+      Router.go('tutorialDetail');
+    }else{
+      Router.go('passwordForm');
+    }
+  }    
 });
