@@ -2,13 +2,13 @@ import { Mongo } from 'meteor/mongo';
 import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
 import { Index, MinimongoEngine } from 'meteor/easy:search'
-export const Tutorials = new Mongo.Collection('tutorials');
 
-const TutorialsIndex = new Index({
+export const Tutorials = new Mongo.Collection('tutorials');
+export const TutorialsIndex = new Index({
   collection: Tutorials,
-  fields: ['tutorialName'],
+  fields: ['tutorialName', 'courseName'],
   engine: new MinimongoEngine(),
-})
+});
 
 //methods that can be accessed by both client and server
 Meteor.methods({
@@ -32,22 +32,3 @@ Meteor.methods({
     Tutorials.remove(tutorial._id);
   }
 });
-
-/*Meteor.publish('tutorials', function(search){
-check(search, Match.OneOf(String, null, undefined));
-
-let query = {},
-  projection = {limit:10, sort: {tutorialName: 2}};
-
-  if(search){
-    let regex = new RegExp(search, 'i');
-
-    query = {
-      $or: [
-        {tutorialName: regex}
-      ]
-    };
-    projection.limit = 100;
-  }
-  return Tutorials.find(query, projection);
-});*/

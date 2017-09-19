@@ -62,39 +62,44 @@
 </template>
 
 <template name="search">
-  {{> EasySearch.Input index=tutorialsIndex}}
+  <div class="input-field">
+    <i class="material-icons prefix">search</i>
+    <!-- input -->
+    {{> EasySearch.Input index=tutorialsIndex attributes=searchInputAttr }}
+    <label for="search">Search</label>
 
-  <ul>
-    {{#EasySearch.Each index=tutorialsIndex}}
-      <li>Name of the player: {{tutorialName}} </li>
-    {{/EasySearch.Each}}
-  </ul>
+  </div>
+
+  <div class="row">
+    {{#EasySearch.Each index=tutorialsIndex}} {{> tutorial }} {{/EasySearch.Each}}
+  </div>
 
   {{> EasySearch.LoadMore index=tutorialsIndex}}
 
+  <!-- -->
   {{#EasySearch.IfNoResults index=tutorialsIndex}}
-    <div class="no-results">No results found!</div>
+  <div class="card blue-grey darken-1">
+    <div class="card-content white-text">
+      <p>No results found!</p>
+    </div>
+  </div>
   {{/EasySearch.IfNoResults}}
 </template>
 
 <template name="tutorials">
   <h4>Tutorials</h4>
   <br>
-  <form>
-      <div class="input-field">
-        <input id="search" type="search" required>
-        <label class="label-icon" for="search"><i class="material-icons">search</i></label>
-        <i class="material-icons">close</i>
-      </div>
-    </form>
-  <div class="row">
-    {{#each tutorials}} {{> tutorial }} {{/each}}
-  </div>
+
+  <!-- Search ocntains the actual data now-->
+  {{> search }}
+  <!-- finish search-->
+
   {{#if isTutor}}
-  <div class="col s12 m6 13 right">
-    <a class="btn-floating btn-large waves-effect waves-light align-right modal-trigger" href="/tutorials/add"><i class="material-icons">
-      add</i></a>
-    </div>
+  <div class="col s12 m6 right">
+    <a class="btn-floating btn-large waves-effect waves-light align-right modal-trigger" href="/tutorials/add">
+      <i class="material-icons">add</i
+    ></a>
+  </div>
   {{/if}}
 </template>
 

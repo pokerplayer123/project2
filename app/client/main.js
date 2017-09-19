@@ -1,20 +1,14 @@
 import { Template } from 'meteor/templating';
-import { Tutorials } from '../lib/tutorials.js';
+import { Tutorials, TutorialsIndex } from '../lib/tutorials.js';
 import { Requests } from '../lib/requests.js';
 import { Accounts } from 'meteor/accounts-base';
-
 import './main.html';
+
+
 
 /**
  * Router Configuration Starts
  */
-
-Router.route('/search/', function () {
-  this.render('search', {
-    data: function () { return Items.findOne({tutorialName}); }
-  });
-});
-    
 
 Router.configure({
   layoutTemplate: 'layout'
@@ -45,7 +39,6 @@ Router.route('/editProfile', {
   template: 'editProfile',
 });
 
-
 /**
  * For Each template, binding javascripts
  */
@@ -54,10 +47,6 @@ Router.route('/editProfile', {
 // -----------------------------------------
 
 Template.tutorials.helpers({
-  tutorials: function () {
-    return Tutorials.find({});
-  },
-
   isStudent: function () {
     return getLoginUserProfile().userType == 'student';
   },
@@ -115,7 +104,6 @@ Template.addTutorial.events({
     target.password.value = '';
 
     // Close modal
-    // $('#addModal').modal('close');
     Router.go('/tutorials');
     return false;
   }
@@ -254,7 +242,6 @@ Template.editProfile.events({
     var oldProfile = getLoginUserProfile();
     var newProfile = Object.assign(oldProfile, objectifyForm(form.serializeArray()));
     Meteor.users.update({ _id: Meteor.userId() }, { $set: { profile: newProfile } });
-    // $('#editProfile').modal('close');
     return false;
   }
 });
@@ -264,10 +251,34 @@ Template.editProfile.events({
 // -----------------------------------------
 
 
+// -----------------------------------------
+// templte search tutorial start
+// -----------------------------------------
+
+Tracker.autorun(function () {
+  let cursor = TutorialsIndex.search('input')
+})
+
+Template.search.helpers({
+  tutorialsIndex: () => TutorialsIndex, // instanceof EasySearch.Index
+  searchInputAttr: function () {
+    return {
+      id: 'search',
+    };
+  }
+})
+
+// -----------------------------------------
+// templte search tutorial end
+// -----------------------------------------
+
+
+// generic helper function
 function getLoginUserProfile() {
   return Meteor.user() ? Meteor.user().profile : {};
 }
 
+// generic helper function
 function objectifyForm(formArray) {//serialize data function
   var returnArray = {};
   for (var i = 0; i < formArray.length; i++) {
@@ -275,59 +286,3 @@ function objectifyForm(formArray) {//serialize data function
   }
   return returnArray;
 }
-
-// -----------------------------------------
-// templte search tutorial start
-// -----------------------------------------
-
-Tracker.autorun(function(){
-  let cursor = TutorialsIndex.search('input')
-
-  console.log(cursor.fetch())
-  console.log(cursor.count())
-})
-
-Tracker.autorun(function(){
-  console.log(TutorialsIndex.search('input', {limit:5, skip:10}).fetch())
-});
-
-
-/*Template.search.onCreated(()=> {
-  let template = Template.instance();
-  template.searchQuery = new ReactiveVar();
-  template.searching = new ReactiveVar(false);
-
-  template.autorun(()=>{
-    template.subscribe('tutorials', template.searchQuery.get(), () => {
-      setTimeout(()=> {
-        template.searching.set(false);
-      },300);
-    });
-  });
-});
-
-Template.search.helpers({
-  searching(){
-    return Template.instance().searching.get();
-  },
-  query(){
-    return Template.instance().searchQuery.get();
-  },
-  tutorials(){
-    let tutorials = Tutorials.find();
-    if(tutorials){
-      return tutorials;
-    }
-  }
-})
-
-Template.search.events({
-  'keyup [tutorialName="search"]' (event, template){
-    let value = event.target.value();
-
-    if (value!== '' && event.keycode===13){
-      template.searchQuery.set(value);
-      template.searching.set
-    }
-  }
-})*/
