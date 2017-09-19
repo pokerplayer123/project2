@@ -30,9 +30,14 @@ Meteor.methods({
     }
 
     Tutorials.remove(tutorial._id);
+  },
+  //method for join tutorial
+  'tutorials.join'(tutorial){
+    if (pass != password.addTutorial){
+      throw new Meteor.Error('Wrong password');
+    }
   }
 });
-
 /*Meteor.publish('tutorials', function(search){
 check(search, Match.OneOf(String, null, undefined));
 

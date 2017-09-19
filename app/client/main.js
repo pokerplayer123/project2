@@ -155,6 +155,8 @@ Template.tutorial.events({
   }
 });
 
+
+
 // -----------------------------------------
 // templte tutorial end
 // -----------------------------------------
@@ -302,49 +304,7 @@ Tracker.autorun(function(){
 });
 
 
-/*Template.search.onCreated(()=> {
-  let template = Template.instance();
-  template.searchQuery = new ReactiveVar();
-  template.searching = new ReactiveVar(false);
 
-  template.autorun(()=>{
-    template.subscribe('tutorials', template.searchQuery.get(), () => {
-      setTimeout(()=> {
-        template.searching.set(false);
-      },300);
-    });
-  });
-});
-
-Template.search.helpers({
-  searching(){
-    return Template.instance().searching.get();
-  },
-  query(){
-    return Template.instance().searchQuery.get();
-  },
-  tutorials(){
-    let tutorials = Tutorials.find();
-    if(tutorials){
-      return tutorials;
-    }
-  }
-})
-
-Template.search.events({
-  'keyup [tutorialName="search"]' (event, template){
-    let value = event.target.value();
-
-    if (value!== '' && event.keycode===13){
-      template.searchQuery.set(value);
-      template.searching.set
-    }
-  }
-})*/
-
-// -----------------------------------------
-// templte search tutorial end
-// -----------------------------------------
 
 // -----------------------------------------
 // templte join tutorial start
@@ -352,10 +312,11 @@ Template.search.events({
 
 Template.passwordForm.events({
   'click .waves-effect waves-light btn': function(){
-    if(inputPassword = password.addTutorial ) {
-      Router.go('tutorialDetail');
-    }else{
-      Router.go('passwordForm');
-    }
-  }    
+
+    var pass = target.inputPassword.value;
+    if(pass== password.addTutorial){
+      Router.go(tutorials._id);
+    } else {
+  }Meteor.call('tutorials.join', this);
+}
 });
