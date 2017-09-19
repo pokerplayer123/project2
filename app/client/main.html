@@ -62,8 +62,8 @@
 </template>
 
 <template name="search">
+    
   {{> EasySearch.Input index=tutorialsIndex}}
-
   <ul>
     {{#EasySearch.Each index=tutorialsIndex}}
       <li>Name of the player: {{tutorialName}} </li>
@@ -75,7 +75,13 @@
   {{#EasySearch.IfNoResults index=tutorialsIndex}}
     <div class="no-results">No results found!</div>
   {{/EasySearch.IfNoResults}}
+
+  Template.search.helpers({
+    tutorialsIndex: () => TutorialsIndex, // instanceof EasySearch.Index
+  })
 </template>
+
+
 
 <template name="tutorials">
   <h4>Tutorials</h4>
@@ -86,6 +92,7 @@
   </div>
   {{/if}}
   <br>
+  
   <form>
       <div class="input-field">
         <input id="search" type="search" required>
@@ -93,6 +100,7 @@
         <i class="material-icons">close</i>
       </div>
     </form>
+
   <div class="row">
     {{#each tutorials}} {{> tutorial }} {{/each}}
   </div>
@@ -123,7 +131,7 @@
         </dl>
       </div>
       <div class="card-action">
-        <a class="waves-effect waves-light btn">Join</a>
+        <a class="btn" href="/joinTutorial" id="joinButton">Join</a>
         <a class="btn" href="/tutorials/{{_id}}">Detail</a> {{#if isOwner}}
         <a class="delete-tutorial btn red"><i class="material-icons">delete</i></a> {{/if}}
       </div>
@@ -291,4 +299,28 @@
       </form>
     </div>
   </div>
+</template>
+
+<template name="joinTutorial">
+  <!-- Modal Content -->
+  <div id="passwordForm" class="modal">
+    <div class="modal-content">
+      <form class="join-class-by-password">
+      <label>Insert class password:</label>
+      <input type="text" id="classPassword" placeholder="Insert the password ....">
+      </form>
+     
+    </div>
+  </div>
+</template>
+
+<template name="passwordForm">
+    <!--Modal Structure -->
+    <div class="row">
+        <div class="input-field col s12">
+          <input id="inputPassword" type="password" class="validate">
+          <label for="password">Password</label>
+        </div>
+      </div>
+      <a class="btn" id="joinPassowrd">join</a>
 </template>

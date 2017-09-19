@@ -9,12 +9,14 @@ import './main.html';
  * Router Configuration Starts
  */
 
-Router.route('/search/', function () {
+Router.route('/search/', function() {
   this.render('search', {
-    data: function () { return Items.findOne({tutorialName}); }
+    data:function(){
+      return Tutorials.findOne({_id: this.params.id});
+  }
   });
 });
-    
+
 
 Router.configure({
   layoutTemplate: 'layout'
@@ -43,6 +45,10 @@ Router.route('/tutorials/:id', {
 
 Router.route('/editProfile', {
   template: 'editProfile',
+});
+
+Router.route('/joinTutorial',{
+  template: 'passwordForm',
 });
 
 
@@ -331,3 +337,24 @@ Template.search.events({
     }
   }
 })*/
+
+// -----------------------------------------
+// templte search tutorial end
+// -----------------------------------------
+
+// -----------------------------------------
+// templte join tutorial start
+// -----------------------------------------
+
+Template.joinTutorial.helpers({
+  'join': function () {
+    if(inputPassword.value.match(password))   
+    {   
+      return tutorialDetail;  
+    }  
+    else  
+    {   
+    alert('Wrong...!')  
+    }  
+}
+});

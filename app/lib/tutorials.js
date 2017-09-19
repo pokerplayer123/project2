@@ -31,6 +31,8 @@ Meteor.methods({
 
     Tutorials.remove(tutorial._id);
   }
+
+  //method for join tutorial
 });
 
 /*Meteor.publish('tutorials', function(search){
