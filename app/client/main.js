@@ -312,11 +312,22 @@ Tracker.autorun(function(){
 
 Template.passwordForm.events({
   'click .waves-effect waves-light btn': function(){
+    var pass = document.getElementById('inputPassword');
+    var word = document.getElementById('password.addTutorial');
 
-    var pass = target.inputPassword.value;
+    joinPassword.click = function(){
+      if(pass == word){
+        Router.go(tutorialDetail_._id);
+      } else {
+        Meteor.call('tutorial,join', this);
+        }
+      }
+    }
+
+    /*var pass = target.inputPassword.value;
     if(pass== password.addTutorial){
-      Router.go(tutorials._id);
+      Router.go(tutorialDetail._id);
     } else {
-  }Meteor.call('tutorials.join', this);
-}
+  } Meteor.call('tutorials.join', this);
+}*/
 });
