@@ -33,7 +33,9 @@ Meteor.methods({
   },
   //method for join tutorial
   'tutorials.join'(tutorial){
-    if (pass != password.addTutorial){
+    if (pass == password.addTutorial){
+        Router.go(tutorialDetails._id);
+    }else{
       throw new Meteor.Error('Wrong-password');
     }
   }
