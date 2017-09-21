@@ -30,38 +30,14 @@ Meteor.methods({
     }
 
     Tutorials.remove(tutorial._id);
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
   },
-  //method for join tutorial
-  'tutorials.join'(tutorial){
-    if (pass != password.addTutorial){
-      throw new Meteor.Error('Wrong password');
+
+  //method to join tutorial
+  'joinTutorial'(tutorial){
+    //call the password of a class
+    if(roomPass == password.tutorial_.id){
+      throw new Meteor.error('wrong-password');
     }
->>>>>>> parent of a978d48... +-=
-  }
+    return Tutorial._id;
+  } 
 });
-=======
-  }
-});
-
-/*Meteor.publish('tutorials', function(search){
-check(search, Match.OneOf(String, null, undefined));
-
-let query = {},
-  projection = {limit:10, sort: {tutorialName: 2}};
-
-  if(search){
-    let regex = new RegExp(search, 'i');
-
-    query = {
-      $or: [
-        {tutorialName: regex}
-      ]
-    };
-    projection.limit = 100;
-  }
-  return Tutorials.find(query, projection);
-});*/
->>>>>>> parent of cb359b5... ++

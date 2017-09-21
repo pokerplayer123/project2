@@ -10,16 +10,6 @@ import './main.html';
  * Router Configuration Starts
  */
 
-<<<<<<< HEAD
-=======
-Router.route('/search/', function () {
-  this.render('search', {
-    data: function () { return Items.findOne({tutorialName}); }
-  });
-});
-    
-
->>>>>>> parent of 72bd1d9... routing for insert password class
 Router.configure({
   layoutTemplate: 'layout'
 });
@@ -28,6 +18,10 @@ Router.route('/', {
   template: 'tutorials',
   data: function () {
   }
+});
+
+Router.route('/Insert-Password', {
+  template: 'Insert',
 });
 
 Router.route('/tutorials', {
@@ -49,10 +43,6 @@ Router.route('/editProfile', {
   template: 'editProfile',
 });
 
-<<<<<<< HEAD
-=======
-
->>>>>>> parent of 72bd1d9... routing for insert password class
 /**
  * For Each template, binding javascripts
  */
@@ -273,7 +263,6 @@ Tracker.autorun(function () {
   let cursor = TutorialsIndex.search('input')
 })
 
-<<<<<<< HEAD
 Template.search.helpers({
   tutorialsIndex: () => TutorialsIndex, // instanceof EasySearch.Index
   searchInputAttr: function () {
@@ -282,63 +271,11 @@ Template.search.helpers({
     };
   }
 })
-=======
-Tracker.autorun(function(){
-  console.log(TutorialsIndex.search('input', {limit:5, skip:10}).fetch())
-});
-
-
-/*Template.search.onCreated(()=> {
-  let template = Template.instance();
-  template.searchQuery = new ReactiveVar();
-  template.searching = new ReactiveVar(false);
-
-  template.autorun(()=>{
-    template.subscribe('tutorials', template.searchQuery.get(), () => {
-      setTimeout(()=> {
-        template.searching.set(false);
-      },300);
-    });
-  });
-});
-
-Template.search.helpers({
-  searching(){
-    return Template.instance().searching.get();
-  },
-  query(){
-    return Template.instance().searchQuery.get();
-  },
-  tutorials(){
-    let tutorials = Tutorials.find();
-    if(tutorials){
-      return tutorials;
-    }
-  }
-})
-
-Template.search.events({
-  'keyup [tutorialName="search"]' (event, template){
-    let value = event.target.value();
-
-    if (value!== '' && event.keycode===13){
-      template.searchQuery.set(value);
-      template.searching.set
-    }
-  }
-})*/
-<<<<<<< HEAD
-
-// -----------------------------------------
-// templte search tutorial end
-// -----------------------------------------
->>>>>>> parent of cb359b5... ++
 
 // -----------------------------------------
 // templte search tutorial end
 // -----------------------------------------
 
-<<<<<<< HEAD
 
 // generic helper function
 function getLoginUserProfile() {
@@ -353,27 +290,16 @@ function objectifyForm(formArray) {//serialize data function
   }
   return returnArray;
 }
-=======
-Template.passwordForm.events({
-  'click .waves-effect waves-light btn': function(){
-<<<<<<< HEAD
 
-    var pass = target.inputPassword.value;
-    if(pass== password.addTutorial){
-      Router.go(tutorials._id);
-    } else {
-  }Meteor.call('tutorials.join', this);
-}
+
+// -----------------------------------------
+// templte join tutorial start
+// -----------------------------------------
+
+Template.search.event({
+  'joinTutorial': function(){
+    var roomPass = target.roomPassword.value;
+    Meteor.call('joinTutorial', this);
+  }
+  
 });
->>>>>>> parent of a978d48... +-=
-=======
-    if(inputPassword = password.addTutorial ) {
-      Router.go('tutorialDetail');
-    }else{
-      Router.go('passwordForm');
-    }
-  }    
-});
->>>>>>> parent of cb359b5... ++
-=======
->>>>>>> parent of 72bd1d9... routing for insert password class
