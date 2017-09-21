@@ -62,6 +62,7 @@
 </template>
 
 <template name="search">
+<<<<<<< HEAD
   <div class="input-field">
     <i class="material-icons prefix">search</i>
     <!-- input -->
@@ -73,6 +74,15 @@
   <div class="row">
     {{#EasySearch.Each index=tutorialsIndex}} {{> tutorial }} {{/EasySearch.Each}}
   </div>
+=======
+  {{> EasySearch.Input index=tutorialsIndex}}
+
+  <ul>
+    {{#EasySearch.Each index=tutorialsIndex}}
+      <li>Name of the player: {{tutorialName}} </li>
+    {{/EasySearch.Each}}
+  </ul>
+>>>>>>> parent of 72bd1d9... routing for insert password class
 
   {{> EasySearch.LoadMore index=tutorialsIndex}}
 
@@ -101,6 +111,20 @@
     ></a>
   </div>
   {{/if}}
+<<<<<<< HEAD
+=======
+  <br>
+  <form>
+      <div class="input-field">
+        <input id="search" type="search" required>
+        <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+        <i class="material-icons">close</i>
+      </div>
+    </form>
+  <div class="row">
+    {{#each tutorials}} {{> tutorial }} {{/each}}
+  </div>
+>>>>>>> parent of 72bd1d9... routing for insert password class
 </template>
 
 <template name="tutorial">
@@ -297,6 +321,7 @@
     </div>
   </div>
 <<<<<<< HEAD
+<<<<<<< HEAD
 </template>
 =======
 </template>
@@ -325,3 +350,6 @@
       <a class="btn" id="joinPassowrd">join</a>
 </template>
 >>>>>>> parent of a978d48... +-=
+=======
+</template>
+>>>>>>> parent of 72bd1d9... routing for insert password class

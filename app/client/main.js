@@ -10,6 +10,16 @@ import './main.html';
  * Router Configuration Starts
  */
 
+<<<<<<< HEAD
+=======
+Router.route('/search/', function () {
+  this.render('search', {
+    data: function () { return Items.findOne({tutorialName}); }
+  });
+});
+    
+
+>>>>>>> parent of 72bd1d9... routing for insert password class
 Router.configure({
   layoutTemplate: 'layout'
 });
@@ -39,6 +49,10 @@ Router.route('/editProfile', {
   template: 'editProfile',
 });
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> parent of 72bd1d9... routing for insert password class
 /**
  * For Each template, binding javascripts
  */
@@ -313,6 +327,7 @@ Template.search.events({
     }
   }
 })*/
+<<<<<<< HEAD
 
 // -----------------------------------------
 // templte search tutorial end
@@ -360,3 +375,5 @@ Template.passwordForm.events({
   }    
 });
 >>>>>>> parent of cb359b5... ++
+=======
+>>>>>>> parent of 72bd1d9... routing for insert password class
