@@ -30,32 +30,5 @@ Meteor.methods({
     }
 
     Tutorials.remove(tutorial._id);
-  },
-  //method for join tutorial
-  'tutorials.join'(tutorial){
-    if (pass != password.addTutorial){
-      throw new Meteor.Error('Wrong-password');
-    }
   }
 });
-<<<<<<< HEAD
-=======
-/*Meteor.publish('tutorials', function(search){
-check(search, Match.OneOf(String, null, undefined));
-
-let query = {},
-  projection = {limit:10, sort: {tutorialName: 2}};
-
-  if(search){
-    let regex = new RegExp(search, 'i');
-
-    query = {
-      $or: [
-        {tutorialName: regex}
-      ]
-    };
-    projection.limit = 100;
-  }
-  return Tutorials.find(query, projection);
-});*/
->>>>>>> harwin2
