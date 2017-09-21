@@ -31,6 +31,7 @@ Meteor.methods({
 
     Tutorials.remove(tutorial._id);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
   },
   //method for join tutorial
@@ -41,3 +42,26 @@ Meteor.methods({
 >>>>>>> parent of a978d48... +-=
   }
 });
+=======
+  }
+});
+
+/*Meteor.publish('tutorials', function(search){
+check(search, Match.OneOf(String, null, undefined));
+
+let query = {},
+  projection = {limit:10, sort: {tutorialName: 2}};
+
+  if(search){
+    let regex = new RegExp(search, 'i');
+
+    query = {
+      $or: [
+        {tutorialName: regex}
+      ]
+    };
+    projection.limit = 100;
+  }
+  return Tutorials.find(query, projection);
+});*/
+>>>>>>> parent of cb359b5... ++

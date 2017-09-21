@@ -259,6 +259,7 @@ Tracker.autorun(function () {
   let cursor = TutorialsIndex.search('input')
 })
 
+<<<<<<< HEAD
 Template.search.helpers({
   tutorialsIndex: () => TutorialsIndex, // instanceof EasySearch.Index
   searchInputAttr: function () {
@@ -267,6 +268,56 @@ Template.search.helpers({
     };
   }
 })
+=======
+Tracker.autorun(function(){
+  console.log(TutorialsIndex.search('input', {limit:5, skip:10}).fetch())
+});
+
+
+/*Template.search.onCreated(()=> {
+  let template = Template.instance();
+  template.searchQuery = new ReactiveVar();
+  template.searching = new ReactiveVar(false);
+
+  template.autorun(()=>{
+    template.subscribe('tutorials', template.searchQuery.get(), () => {
+      setTimeout(()=> {
+        template.searching.set(false);
+      },300);
+    });
+  });
+});
+
+Template.search.helpers({
+  searching(){
+    return Template.instance().searching.get();
+  },
+  query(){
+    return Template.instance().searchQuery.get();
+  },
+  tutorials(){
+    let tutorials = Tutorials.find();
+    if(tutorials){
+      return tutorials;
+    }
+  }
+})
+
+Template.search.events({
+  'keyup [tutorialName="search"]' (event, template){
+    let value = event.target.value();
+
+    if (value!== '' && event.keycode===13){
+      template.searchQuery.set(value);
+      template.searching.set
+    }
+  }
+})*/
+
+// -----------------------------------------
+// templte search tutorial end
+// -----------------------------------------
+>>>>>>> parent of cb359b5... ++
 
 // -----------------------------------------
 // templte search tutorial end
@@ -290,6 +341,7 @@ function objectifyForm(formArray) {//serialize data function
 =======
 Template.passwordForm.events({
   'click .waves-effect waves-light btn': function(){
+<<<<<<< HEAD
 
     var pass = target.inputPassword.value;
     if(pass== password.addTutorial){
@@ -299,3 +351,12 @@ Template.passwordForm.events({
 }
 });
 >>>>>>> parent of a978d48... +-=
+=======
+    if(inputPassword = password.addTutorial ) {
+      Router.go('tutorialDetail');
+    }else{
+      Router.go('passwordForm');
+    }
+  }    
+});
+>>>>>>> parent of cb359b5... ++
