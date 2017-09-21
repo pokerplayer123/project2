@@ -44,6 +44,8 @@ Meteor.methods({
 });
 =======
   }
+
+  //method for join tutorial
 });
 
 /*Meteor.publish('tutorials', function(search){
