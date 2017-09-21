@@ -30,5 +30,14 @@ Meteor.methods({
     }
 
     Tutorials.remove(tutorial._id);
-  }
+  },
+
+  //method to join tutorial
+  'joinTutorial'(tutorial){
+    //call the password of a class
+    if(roomPass == password.tutorial_.id){
+      throw new Meteor.error('wrong-password');
+    }
+    return Tutorial._id;
+  } 
 });

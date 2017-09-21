@@ -290,3 +290,16 @@ function objectifyForm(formArray) {//serialize data function
   }
   return returnArray;
 }
+
+
+// -----------------------------------------
+// templte join tutorial start
+// -----------------------------------------
+
+Template.search.event({
+  'joinTutorial': function(){
+    var roomPass = target.roomPassword.value;
+    Meteor.call('joinTutorial', this);
+  }
+  
+});
