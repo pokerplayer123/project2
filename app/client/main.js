@@ -10,18 +10,6 @@ import './main.html';
  * Router Configuration Starts
  */
 
-<<<<<<< HEAD
-=======
-Router.route('/search/', function() {
-  this.render('search', {
-    data:function(){
-      return Tutorials.findOne({_id: this.params.id});
-  }
-  });
-});
-
-
->>>>>>> harwin2
 Router.configure({
   layoutTemplate: 'layout'
 });
@@ -51,18 +39,6 @@ Router.route('/editProfile', {
   template: 'editProfile',
 });
 
-<<<<<<< HEAD
-=======
-Router.route('/joinTutorial',{
-  template: 'passwordForm',
-});
-
-Router.route('/passwordForm',{
-  template: 'tutorialDetail',
-});
-
-
->>>>>>> harwin2
 /**
  * For Each template, binding javascripts
  */
@@ -156,8 +132,6 @@ Template.tutorial.events({
     }
   }
 });
-
-
 
 // -----------------------------------------
 // templte tutorial end
@@ -285,7 +259,6 @@ Tracker.autorun(function () {
   let cursor = TutorialsIndex.search('input')
 })
 
-<<<<<<< HEAD
 Template.search.helpers({
   tutorialsIndex: () => TutorialsIndex, // instanceof EasySearch.Index
   searchInputAttr: function () {
@@ -313,37 +286,3 @@ function objectifyForm(formArray) {//serialize data function
   }
   return returnArray;
 }
-=======
-Tracker.autorun(function(){
-  console.log(TutorialsIndex.search('input', {limit:5, skip:10}).fetch())
-});
-
-
-
-
-// -----------------------------------------
-// templte join tutorial start
-// -----------------------------------------
-
-Template.passwordForm.events({
-  'click .waves-effect waves-light btn': function(){
-    var pass = document.getElementById('inputPassword');
-    var word = document.getElementById('password.addTutorial');
-
-    joinPassword.click = function(){
-      if(pass == word){
-        Router.go(tutorialDetail_._id);
-      } else {
-        Meteor.call('tutorial,join', this);
-        }
-      }
-    }
-
-    /*var pass = target.inputPassword.value;
-    if(pass== password.addTutorial){
-      Router.go(tutorialDetail._id);
-    } else {
-  } Meteor.call('tutorials.join', this);
-}*/
-});
->>>>>>> harwin2
