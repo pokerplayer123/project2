@@ -32,6 +32,7 @@
   </script>
 </template>
 
+
 <template name="nav">
 
   <nav class="amber nav-extended">
@@ -62,7 +63,6 @@
 </template>
 
 <template name="search">
-<<<<<<< HEAD
   <div class="input-field">
     <i class="material-icons prefix">search</i>
     <!-- input -->
@@ -74,15 +74,6 @@
   <div class="row">
     {{#EasySearch.Each index=tutorialsIndex}} {{> tutorial }} {{/EasySearch.Each}}
   </div>
-=======
-  {{> EasySearch.Input index=tutorialsIndex}}
-
-  <ul>
-    {{#EasySearch.Each index=tutorialsIndex}}
-      <li>Name of the player: {{tutorialName}} </li>
-    {{/EasySearch.Each}}
-  </ul>
->>>>>>> parent of 72bd1d9... routing for insert password class
 
   {{> EasySearch.LoadMore index=tutorialsIndex}}
 
@@ -111,20 +102,6 @@
     ></a>
   </div>
   {{/if}}
-<<<<<<< HEAD
-=======
-  <br>
-  <form>
-      <div class="input-field">
-        <input id="search" type="search" required>
-        <label class="label-icon" for="search"><i class="material-icons">search</i></label>
-        <i class="material-icons">close</i>
-      </div>
-    </form>
-  <div class="row">
-    {{#each tutorials}} {{> tutorial }} {{/each}}
-  </div>
->>>>>>> parent of 72bd1d9... routing for insert password class
 </template>
 
 <template name="tutorial">
@@ -152,7 +129,7 @@
         </dl>
       </div>
       <div class="card-action">
-        <a class="waves-effect waves-light btn">Join</a>
+        <a class="waves-effect waves-light btn" href="/Insert-Password">Join</a>
         <a class="btn" href="/tutorials/{{_id}}">Detail</a> {{#if isOwner}}
         <a class="delete-tutorial btn red"><i class="material-icons">delete</i></a> {{/if}}
       </div>
@@ -259,6 +236,16 @@
   </script>
 </template>
 
+<template name="Insert" class="modal">
+  <form id="insert-password">
+    <div class="modal-content">
+      <h4>Insert the room password</h4>
+      <label for="Password">Password</label>
+      <input id="roomPassword" type="password">
+      </div>
+  </form>
+</template>
+
 <template name="requestItem">
   <li style="position: relative">
     {{#if isRequestOwner }}
@@ -320,36 +307,4 @@
       </form>
     </div>
   </div>
-<<<<<<< HEAD
-<<<<<<< HEAD
 </template>
-=======
-</template>
-
-<template name="joinTutorial">
-  <!-- Modal Content -->
-  <div id="passwordForm" class="modal">
-    <div class="modal-content">
-      <form class="join-class-by-password">
-      <label>Insert class password:</label>
-      <input type="text" id="classPassword" placeholder="Insert the password ....">
-      </form>
-     
-    </div>
-  </div>
-</template>
-
-<template name="passwordForm">
-    <!--Modal Structure -->
-    <div class="row">
-        <div class="input-field col s12">
-          <input id="inputPassword" type="password" class="validate">
-          <label for="password">Password</label>
-        </div>
-      </div>
-      <a class="btn" id="joinPassowrd">join</a>
-</template>
->>>>>>> parent of a978d48... +-=
-=======
-</template>
->>>>>>> parent of 72bd1d9... routing for insert password class
