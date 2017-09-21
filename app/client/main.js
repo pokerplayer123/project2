@@ -272,6 +272,7 @@ Template.search.helpers({
 // templte search tutorial end
 // -----------------------------------------
 
+<<<<<<< HEAD
 
 // generic helper function
 function getLoginUserProfile() {
@@ -286,3 +287,15 @@ function objectifyForm(formArray) {//serialize data function
   }
   return returnArray;
 }
+=======
+Template.passwordForm.events({
+  'click .waves-effect waves-light btn': function(){
+
+    var pass = target.inputPassword.value;
+    if(pass== password.addTutorial){
+      Router.go(tutorials._id);
+    } else {
+  }Meteor.call('tutorials.join', this);
+}
+});
+>>>>>>> parent of a978d48... +-=

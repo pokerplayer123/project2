@@ -30,5 +30,14 @@ Meteor.methods({
     }
 
     Tutorials.remove(tutorial._id);
+<<<<<<< HEAD
+=======
+  },
+  //method for join tutorial
+  'tutorials.join'(tutorial){
+    if (pass != password.addTutorial){
+      throw new Meteor.Error('Wrong password');
+    }
+>>>>>>> parent of a978d48... +-=
   }
 });
