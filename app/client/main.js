@@ -39,6 +39,8 @@ Router.route('/tutorials/:id', {
   }
 });
 
+
+
 Router.route('/editProfile', {
   template: 'editProfile',
 });
