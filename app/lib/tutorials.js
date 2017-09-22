@@ -35,9 +35,10 @@ Meteor.methods({
   //method to join tutorial
   'joinTutorial'(tutorial){
     //call the password of a class
-    if(roomPass == password.tutorial_.id){
+    Tutorials.find({password:{ _id: this.params.id }}).fetch();
+    if(roomPass != password){
       throw new Meteor.error('wrong-password');
     }
-    return Tutorial._id;
+    return tutorialDetails._id;
   } 
 });
