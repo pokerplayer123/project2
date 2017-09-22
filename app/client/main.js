@@ -39,6 +39,13 @@ Router.route('/tutorials/:id', {
   }
 });
 
+Router.route('/detail/:id', {
+  template: 'Detail',
+  data: function () {
+    return Tutorials.findOne({ _id: this.params.id });
+  }
+});
+
 
 
 Router.route('/editProfile', {

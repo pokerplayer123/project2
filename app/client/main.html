@@ -130,7 +130,7 @@
       </div>
       <div class="card-action">
         <a class="waves-effect waves-light btn" href="/Insert-Password">Join</a> {{#if isTutorial}}{{/if}}
-        <a class="btn" href="/tutorials/{{_id}}">Detail</a> {{#if isOwner}}
+        <a class="btn" href="/Detail/{{_id}}">Detail</a> {{#if isOwner}}
         <a class="delete-tutorial btn red"><i class="material-icons">delete</i></a> {{/if}}
       </div>
     </div>
@@ -271,6 +271,40 @@
     </div>
   </li>
 </template>
+
+<template name="Detail">
+  <br>
+  <div class="row">
+    <div class="col s12 m5 l4">
+      <div class="card">
+        <div class="card-image">
+          <img src="/img/unsw-logo-large.jpg">
+          <span class="card-title">{{tutorialName}}</span>
+        </div>
+        <div class="card-content">
+          <dl class="row">
+            <dt class="col s4"><b>Tutorial:</b></dt>
+            <dd class="col s8">{{tutorialName}}</dd>
+          </dl>
+          <dl class="row">
+            <dt class="col s4"><b>Course:</b></dt>
+            <dd class="col s8">{{courseName}}</dd>
+          </dl>
+          <dl class="row">
+            <dt class="col s4"><b>Start:</b></dt>
+            <dd class="col s8">{{startDate}} {{startTime}}</dd>
+          </dl>
+          <dl class="row">
+            <dt class="col s4"><b>End:</b></dt>
+            <dd class="col s8">{{endDate}} {{endTime}}</dd>
+          </dl>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+  
 
 <template name="editProfile">
   <!--Modal Structure -->
