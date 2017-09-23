@@ -305,8 +305,8 @@ function objectifyForm(formArray) {//serialize data function
 // templte join tutorial start
 // -----------------------------------------
 
-Template.search.event({
-  'click .joinClass': function(){
+Template.insert.events({
+  'click .joinTutorial': function(){
     var roomPass = target.roomPassword.value;
     Meteor.call('joinTutorial', this);
   }

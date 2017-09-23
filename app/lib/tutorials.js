@@ -36,6 +36,7 @@ Meteor.methods({
   'joinTutorial'(tutorial){
     //call the password of a class
     Tutorials.find({password:{ _id: this.params.id }}).fetch();
+    console.log(password);
     if(roomPass != password){
       throw new Meteor.error('wrong-password');
     }
