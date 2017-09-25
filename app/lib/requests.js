@@ -15,9 +15,9 @@ Meteor.methods({
 
   'requests.remove'(request) {
     check(request._id, String);
-    if (request.owner !== Meteor.userId()) {
-      throw new Meteor.Error('not-authorized');
-    }
+    // if (request.owner !== Meteor.userId()) {
+    //   throw new Meteor.Error('not-authorized');
+    // }
     Requests.remove(request._id);
   }
 });
