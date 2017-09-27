@@ -2,6 +2,7 @@ import { Template } from 'meteor/templating';
 import { Tutorials, TutorialsIndex } from '../lib/tutorials.js';
 import { Requests } from '../lib/requests.js';
 import { Accounts } from 'meteor/accounts-base';
+import { Subforums } from '../lib/subforums.js';
 import './main.html';
 
 
@@ -42,6 +43,13 @@ Router.route('/tutorials/:id', {
 Router.route('/editProfile', {
   template: 'editProfile',
 });
+
+Router.route('/tutorials/forum/:id', {
+  template: 'forum',
+  data: function() {
+    return Subforums.findOne({ tutorialId: this.params.id});
+  }
+})
 
 /**
  * For Each template, binding javascripts
@@ -174,6 +182,7 @@ Template.tutorialDetail.events({
   'submit #create-request-form': function (e) {
     e.preventDefault();
     var form = $(e.target);
+    console.log(form);
     var modal = $('#create-request-modal');
     var request = objectifyForm(form.serializeArray());
     request = Object.assign(request, {
@@ -182,7 +191,6 @@ Template.tutorialDetail.events({
       ownerZid: getLoginUserProfile().zid,
       tutorialId: this._id
     });
-
     Meteor.call('requests.insert', request);
     modal.modal('close');
   },
@@ -208,11 +216,55 @@ Template.requestItem.events({
 });
 
 // -----------------------------------------
-// templte tutorialDetail end
+// template tutorialDetail end
 // -----------------------------------------
 
 // -----------------------------------------
-// templte editProfile Start
+// template threads Start
+// -----------------------------------------
+
+Template.forum.helpers({
+  'subforums': function () {
+    return Subforums.find({ tutorialId: this.tutorialId }, { sorted: { createdAt: -1 } });
+  },
+  'hasSubforums': function () {
+    return Subforums.find({ tutorialId: this.tutorialId }).count() > 0;
+  }
+
+});
+
+Template.forum.events({
+  'click #create-subforum': function (e) {
+    e.preventDefault();
+    var modal = $('#create-subforum-modal');
+    modal.modal();
+    modal.modal('open');
+  },
+
+  'submit #create-subforum-form': function() {
+    event.preventDefault();
+    var form = event.target;
+    var modal = $('#create-subforum-modal');
+    subforumname = form.subforum.value;
+    description = form.description.value;
+    tutorialId = Router.current().params.id;
+    Meteor.call('subforums.insert', {
+      subforumname: subforumname,
+      description: description,
+      tutorialId: tutorialId,
+    });
+    modal.modal('close');
+  }
+});
+
+
+// -----------------------------------------
+// template threads end
+// -----------------------------------------
+
+
+// -----------------------------------------
+// template editProfile Start
 // -----------------------------------------
 Template.editProfile.helpers({
   userProfile: function () {

@@ -6,7 +6,7 @@ export const Threads = new Mongo.Collection('threads');
 
 Meteor.methods({
   'threads.insert'(thread){
-    if(!Meteor.userId) {
+    if(!Meteor.userId()) {
       throw new Meteor.Error('not-authorized');
     }
     var id= Threads.insert(thread);
