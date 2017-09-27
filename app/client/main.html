@@ -42,6 +42,9 @@
       <ul id="nav-mobile" class="right hide-on-med-and-down">
         {{#if currentUser}}
         <li><a href="/">Tutorials</a></li>
+        {{#if isTutor}}
+        <li><a href="/my-tutorials">My Tutorials</a></li>
+        {{/if}}
         <li><a href="/editProfile">Edit Profile</a></li>
         {{/if}}
         <li>
@@ -51,6 +54,9 @@
       <ul class="side-nav" id="mobile-demo">
         {{#if currentUser}}
         <li><a href="/">Tutorials</a></li>
+        {{#if isTutor}}
+        <li><a href="/my-tutorials">My Tutorials</a></li>
+        {{/if}}
         <li><a href="/editProfile">Edit Profile</a></li>
         {{/if}}
         <li>
@@ -137,6 +143,21 @@
 
 </template>
 
+<template name="myTutorials">
+  <h4>My Tutorials</h4>
+  <br>
+
+  <div class="row">
+    {{#each tutorials}} {{> tutorial }} {{/each}}
+  </div>
+
+  <div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
+    <a class="btn-floating btn-large waves-effect waves-light align-right modal-trigger" href="/tutorials/add">
+      <i class="material-icons">add</i
+    ></a>
+  </div>
+</template>
+
 <template name="addTutorial">
   <!--Modal Structure -->
   <div id="addModal" class="">
@@ -192,19 +213,47 @@
     </div>
     <div class="col s12 m7 l8">
 
+      <p class="red-text" id="errorMsg"></p>
+      <!-- -->
 
+<<<<<<< HEAD
       <h4>Request List</h4>
       <div class="right-align">
         <a class="btn waves-effect waves-light btn" id="create-request" href="#create-request-modal">New Request</a>
+=======
+      <div id="password-section" style="display: {{passwordSectionStyle}}">
+        <h5>Enter password to join this room</h5>
+        <br>
+        <form id="join-room">
+          <div class="input-field">
+            <input id="room-password" name="room-password" type="password" required>
+            <label for="room-password">Room Password</label>
+          </div>
+          <button type="submit" class="btn waves-effect waves-light">Join</button>
+        </form>
+>>>>>>> refs/remotes/origin/rushma2
       </div>
 
-      <br> {{#if hasRequests}}
-      <ul class="collapsible" data-collapsible="expandable">
-        {{#each requests}} {{> requestItem}} {{/each}}
-      </ul>
-      {{else}}
-      <p>There is no requests yet.</p>
-      {{/if}}
+      <div id="detail-section" style="display: {{detailSectionStyle}}" data-tutorial-id="{{_id}}" data-tutorial-owner="{{owner}}">
+
+        <h4>Request List</h4>
+        {{#if isTutor }}
+        <!-- -->
+        {{else}}
+        <div class="right-align">
+          <a class="btn waves-effect waves-light btn modal-trigger" id="create-request" href="#create-request-modal">New Request</a>
+        </div>
+        {{/if}}
+        <br>
+        <!-- -->
+        {{#if hasRequests}}
+        <ul class="collapsible" data-collapsible="expandable">
+          {{#each requests}} {{> requestItem }} {{/each}}
+        </ul>
+        {{else}}
+        <p>There is no requests yet.</p>
+        {{/if}}
+      </div>
 
     </div>
   </div>
@@ -240,7 +289,7 @@
 
 <template name="requestItem">
   <li style="position: relative">
-    {{#if isRequestOwner }}
+    {{#if isRequestOwnerOrTutorialOwner }}
     <a class="btn-floating red delete-request"> <i class="material-icons">close</i></a>
     <!-- -->
     {{/if}}
@@ -299,6 +348,7 @@
       </form>
     </div>
   </div>
+<<<<<<< HEAD
 </template>
 
 <template name="forum">
@@ -374,3 +424,6 @@
 
 <template name="threads">
 </template>
+=======
+</template>
+>>>>>>> refs/remotes/origin/rushma2

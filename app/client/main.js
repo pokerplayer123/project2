@@ -29,6 +29,11 @@ Router.route('/tutorials', {
   template: 'tutorials',
 });
 
+Router.route('/my-tutorials', {
+  template: 'myTutorials',
+});
+
+
 Router.route('/tutorials/add', {
   template: 'addTutorial',
 });
@@ -61,10 +66,23 @@ Router.route('/tutorials/forum/:id/:subforumname', {
 /**
  * For Each template, binding javascripts
  */
+
+// -----------------------------------------
+// templte nav start
+// -----------------------------------------
+Template.nav.helpers({
+  isTutor: function () {
+    return getLoginUserProfile().userType == 'tutor';
+  },
+});
+// -----------------------------------------
+// templte nav end
+// -----------------------------------------
+
+
 // -----------------------------------------
 // templte tutorials start
 // -----------------------------------------
-
 Template.tutorials.helpers({
   isStudent: function () {
     return getLoginUserProfile().userType == 'student';
@@ -86,6 +104,20 @@ Template.tutorials.helpers({
 // -----------------------------------------
 // templte tutorials end
 // -----------------------------------------
+
+// -----------------------------------------
+// templte MyTutorials start
+// -----------------------------------------
+Template.myTutorials.helpers({
+  'tutorials': function() {
+    return Tutorials.find({owner: Meteor.user()._id});
+  }
+});
+
+// -----------------------------------------
+// templte MyTutorials end
+// -----------------------------------------
+
 
 // -----------------------------------------
 // templte addTutorial start
@@ -168,14 +200,32 @@ Template.atNavButton.events({
 // -----------------------------------------
 // templte tutorialDetail start
 // -----------------------------------------
+Template.tutorialDetail.onCreated(function () {
+  // if not the owner tutor, always need to enter password
+  this.data.needToJoin = this.data.owner != Meteor.user()._id;
+  this.data.isJoined = !this.data.needToJoin;
+  this.data.errorMsg = '';
+});
 Template.tutorialDetail.helpers({
   'requests': function () {
-    return Requests.find({ tutorialId: this._id }, { sorted: { createdAt: -1 } });
+    var requests = Requests.find({ tutorialId: this._id }, { sorted: { createdAt: -1 } });
+    return requests
   },
   'hasRequests': function () {
     return Requests.find({ tutorialId: this._id }).count() > 0;
-  }
-
+  },
+  'isTutor': function () {
+    return getLoginUserProfile().userType == 'tutor';
+  },
+  'isOwner': function () {
+    return this.owner == Meteor.user()._id;
+  },
+  'passwordSectionStyle': function () {
+    return this.isJoined ? 'none' : 'block';
+  },
+  'detailSectionStyle': function () {
+    return !this.isJoined ? 'none' : 'block';
+  },
 });
 
 Template.tutorialDetail.events({
@@ -202,11 +252,27 @@ Template.tutorialDetail.events({
     modal.modal('close');
   },
 
+  'submit #join-room': function (e, instance) {
+    e.preventDefault();
+    $('#errorMsg').html('');
+
+    var form = $(e.target);
+    var password = form.find('[name=room-password]').val();
+    if (password == this.password) {
+      this.isJoined = true;
+      $('#password-section').hide();
+      $('#detail-section').show();
+    } else {
+      $('#errorMsg').html('Invalid password, please try again');
+    }
+  }
+
 });
 
 Template.requestItem.helpers({
-  'isRequestOwner': function () {
-    return this.owner == Meteor.user()._id;
+  'isRequestOwnerOrTutorialOwner': function () {
+    var tutorial = Tutorials.findOne({ _id: this.tutorialId });
+    return this.owner == Meteor.user()._id || (tutorial && tutorial.owner == Meteor.user()._id);
   },
   'fromNow': function () {
     return moment(this.createdAt).fromNow();
