@@ -51,6 +51,13 @@ Router.route('/tutorials/forum/:id', {
   }
 })
 
+Router.route('/tutorials/forum/:id/:subforumname', {
+  template: 'threads',
+  data: function() {
+    return Threads.findOne({ tutorialId: this.params.id, subforumname: this.params.subforumname});
+  }
+})
+
 /**
  * For Each template, binding javascripts
  */
