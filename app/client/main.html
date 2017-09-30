@@ -205,9 +205,6 @@
             <dt class="col s4"><b>End:</b></dt>
             <dd class="col s8">{{endDate}} {{endTime}}</dd>
           </dl>
-          <dl class="center-align">
-            <a class="btn waves-effect waves-light btn modal-trigger" id="view-forum" href="/tutorials/forum/{{_id}}">View Forum</a>
-          </dl>
         </div>
       </div>
     </div>
@@ -229,6 +226,9 @@
       </div>
 
       <div id="detail-section" style="display: {{detailSectionStyle}}" data-tutorial-id="{{_id}}" data-tutorial-owner="{{owner}}">
+        <div class="right-align">
+          <a class="btn waves-effect waves-light btn modal-trigger" id="view-forum" href="/tutorials/forum/{{_id}}">View Forum</a>
+        </div>
 
         <h4>Request List</h4>
         {{#if isTutor }}
