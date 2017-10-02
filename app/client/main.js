@@ -3,6 +3,7 @@ import { Tutorials, TutorialsIndex } from '../lib/tutorials.js';
 import { Requests } from '../lib/requests.js';
 import { Accounts } from 'meteor/accounts-base';
 import { Subforums } from '../lib/subforums.js';
+import { Threads } from '../lib/threads.js';
 import './main.html';
 
 
@@ -51,15 +52,18 @@ Router.route('/editProfile', {
 
 Router.route('/tutorials/forum/:id', {
   template: 'forum',
-  data: function() {
-    return Subforums.findOne({ tutorialId: this.params.id});
+  data: function () {
+    return Subforums.findOne({ tutorialId: this.params.id });
   }
 })
 
-Router.route('/tutorials/forum/:id/:subforumname', {
-  template: 'threads',
-  data: function() {
-    return Threads.findOne({ tutorialId: this.params.id, subforumname: this.params.subforumname});
+Router.route('/tutorials/forum/:tutorialId/subforum/:subforumId', {
+  template: 'subforum',
+  data: function () {
+    return {
+      subforum: Subforums.findOne({ _id: this.params.subforumId }),
+      threads: Threads.find({ subforumId: this.params.subforumId })
+    }
   }
 })
 
@@ -109,8 +113,8 @@ Template.tutorials.helpers({
 // templte MyTutorials start
 // -----------------------------------------
 Template.myTutorials.helpers({
-  'tutorials': function() {
-    return Tutorials.find({owner: Meteor.user()._id});
+  'tutorials': function () {
+    return Tutorials.find({ owner: Meteor.user()._id });
   }
 });
 
@@ -293,7 +297,7 @@ Template.requestItem.events({
 // -----------------------------------------
 
 // -----------------------------------------
-// template threads Start
+// template forum Start
 // -----------------------------------------
 
 Template.forum.helpers({
@@ -302,6 +306,9 @@ Template.forum.helpers({
   },
   'hasSubforums': function () {
     return Subforums.find({ tutorialId: this.tutorialId }).count() > 0;
+  },
+  'tutorial': function () {
+    return Tutorials.findOne({ _id: this.tutorialId });
   }
 
 });
@@ -314,7 +321,7 @@ Template.forum.events({
     modal.modal('open');
   },
 
-  'submit #create-subforum-form': function() {
+  'submit #create-subforum-form': function () {
     event.preventDefault();
     var form = event.target;
     var modal = $('#create-subforum-modal');
@@ -325,14 +332,128 @@ Template.forum.events({
       subforumname: subforumname,
       description: description,
       tutorialId: tutorialId,
+      owner: Meteor.user()._id,
+      createdAt: new Date(),
+      isClosed: false
     });
     modal.modal('close');
+  }
+});
+// -----------------------------------------
+// template forum end
+// -----------------------------------------
+
+
+// -----------------------------------------
+// template subforumCard start
+// -----------------------------------------
+
+Template.subforumCard.helpers({
+  isOwner: function () {
+    return this.owner == Meteor.user()._id;
+  }
+});
+
+Template.subforumCard.events({
+  'click .delete-subforum': function (e) {
+    e.preventDefault();
+    Meteor.call('subforums.remove', this);
   }
 });
 
 
 // -----------------------------------------
-// template threads end
+// template subforumCard end
+// -----------------------------------------
+
+// -----------------------------------------
+// template subforum Start
+// -----------------------------------------
+
+Template.subforum.helpers({
+  isOwner: function () {
+    return this.subforum.owner == Meteor.user()._id;
+  },
+
+  isSubforumClosed: function() {
+    return this.subforum.isClosed;
+  }
+
+});
+
+Template.subforum.events({
+  'submit #create-thread': function (e) {
+    event.preventDefault();
+    var form = $(e.currentTarget);
+
+    var answer = form.find('#answer').val();
+    var data = {
+      tutorialId: Router.current().params.tutorialId,
+      subforumId: Router.current().params.subforumId,
+      answer: answer,
+      owner: Meteor.user()._id,
+      ownerName: getLoginUserFullname(),
+      createdAt: new Date()
+    }
+    Meteor.call('threads.insert', data);
+    form.find('#answer').val('');
+  },
+
+  'click .close-subforum': function(e) {
+    debugger
+    e.preventDefault();
+    Subforums.update({ _id: this.subforum._id }, { $set: { isClosed: true } });
+  },
+
+  'click .open-subforum': function(e) {
+    e.preventDefault();
+    Subforums.update({ _id: this.subforum._id }, { $set: { isClosed: false } });
+  }
+});
+
+// -----------------------------------------
+// template subforum end
+// -----------------------------------------
+
+
+// -----------------------------------------
+// template threadDetail Start
+// -----------------------------------------
+Template.threadDetail.helpers({
+  'fromNow': function () {
+    return moment(this.createdAt).fromNow();
+  },
+
+  isOwner: function () {
+    return this.owner == Meteor.user()._id;
+  },
+
+  isSubforumOwner: function() {
+    var subforum = Subforums.findOne({_id: Router.current().params.subforumId});
+    return subforum.owner == Meteor.user()._id;
+  },
+
+  isBestAnswer: function() {
+    var subforum = Subforums.findOne({_id: Router.current().params.subforumId});
+    return subforum.bestAnswer == this._id;
+  }
+});
+
+Template.threadDetail.events({
+  'click .delete-thread': function (e) {
+    e.preventDefault();
+    Meteor.call('threads.remove', this);
+  },
+
+  'click .pick-best-answer': function(e) {
+    e.preventDefault();
+    var subforum = Subforums.findOne({_id: Router.current().params.subforumId});
+    Subforums.update({ _id: subforum._id }, { $set: { bestAnswer: this._id } });
+  }
+});
+
+// -----------------------------------------
+// template threadDetail end
 // -----------------------------------------
 
 
@@ -405,6 +526,11 @@ Template.search.helpers({
 // generic helper function
 function getLoginUserProfile() {
   return Meteor.user() ? Meteor.user().profile : {};
+}
+
+function getLoginUserFullname() {
+  var profile = getLoginUserProfile();
+  return ((profile.firstname || '') + ' ' + (profile.lastname || '')).trim();
 }
 
 // generic helper function

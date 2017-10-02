@@ -15,7 +15,7 @@ Meteor.methods({
 
   'subforums.remove'(subforum) {
     check(subforum._id, String);
-    if (request.owner !== Meteor.userId()) {
+    if (subforum.owner !== Meteor.userId()) {
       throw new Meteor.Error('not-authorized');
     }
     Subforums.remove(subforum._id);
