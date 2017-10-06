@@ -507,8 +507,13 @@
         </div>
       {{/if}}
       <div class="small">
-        <p class="right-align">answered {{fromNow}}</p>
+        <p class="right-align"><i class="small material-icons right">access_time</i>{{fromNow}}</p>
         <p class="right-align">by {{ownerName}}</p>
+      </div>
+      <div class="small">
+        <a class="btn"><i class="small material-icons left">thumb_up</i>like</a>
+        <a class="btn"><i class="small material-icons left">reply</i>reply</a>
+
       </div>
     </div>
     {{#if isOwner}}
