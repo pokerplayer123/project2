@@ -226,17 +226,12 @@
       </div>
 
       <div id="detail-section" style="display: {{detailSectionStyle}}" data-tutorial-id="{{_id}}" data-tutorial-owner="{{owner}}">
-        <div class="right-align">
-          <a class="btn waves-effect waves-light btn modal-trigger" id="view-forum" href="/tutorials/forum/{{_id}}">View Forum</a>
-        </div>
 
-        <h4>Request List</h4>
+        <div class="left-align"><h4>Request List</h4>
         {{#if isTutor }}
         <!-- -->
         {{else}}
-        <div class="right-align">
-          <a class="btn waves-effect waves-light btn modal-trigger" id="create-request" href="#create-request-modal">New Request</a>
-        </div>
+
         {{/if}}
         <br>
         <!-- -->
@@ -245,10 +240,25 @@
           {{#each requests}} {{> requestItem }} {{/each}}
         </ul>
         {{else}}
-        <p>There is no requests yet.</p>
-        {{/if}}
-      </div>
+        <p>There are no requests yet.</p>
 
+        {{/if}}
+        <div class="right-align">
+          <a class="btn waves-effect waves-light btn modal-trigger" id="create-request" href="#create-request-modal">New Request</a>
+        </div>
+      </div>
+          <div class="card">
+          <div class="card-image waves-effect waves-block waves-light">
+      <img width="500" height="300" src="/img/night-sky.jpg">
+
+      <span class="card-title"><h4> Forum </h4></span>
+    </div>
+    <div class="card-content right-align">
+      <a class="btn-large btn-floating waves-effect waves-light right-align" id="view-forum" href="/tutorials/forum/{{_id}}"><i class="material-icons">pageview</i>
+      </a>
+    </div>
+      </div>
+      </div>
     </div>
   </div>
 
@@ -293,6 +303,7 @@
       <span style="flex-grow: 1;"></span>
       <span>{{ownerZid}}</span>
       <span class="date-label">{{fromNow}}</span>
+      <i class="material-icons" style="2rem">keyboard_arrow_down</i>
     </div>
     <div class="collapsible-body" style="padding: 0.5rem 1rem">
       <p>
