@@ -33,3 +33,64 @@ action.button {
     margin-left: 10px;
     margin-top: 2px;
 }
+.btn {
+  background-color: #0d47a1;
+}
+.btn-floating{
+  background-color: #0d47a1;
+}
+.btn:hover {
+  background-color: #1565c0;
+}
+.btn-floating:hover{
+  background-color: #1565c0;
+}
+
+/* label color */
+   .input-field label {
+     color: ;
+   }
+   /* label focus color */
+   .input-field input:focus + label {
+     color: #1565c0 !important;
+   }
+   /* label underline focus color */
+   .input-field input:focus {
+     border-bottom: 1px solid #1565c0 !important;
+     box-shadow: 0 1px 0 0 #1565c0 !important;
+   }
+   /* valid color */
+   .input-field input.valid {
+     border-bottom: 1px solid #1565c0 !important;
+     box-shadow: 0 1px 0 0 #1565c0 !important;
+   }
+   /* invalid color */
+   .input-field input.invalid {
+     border-bottom: 1px solid #1565c0 !important;
+     box-shadow: 0 1px 0 0 #1565c0 !important;
+   }
+   /* icon prefix focus color */
+   .input-field .prefix.active {
+     color: #1565c0 !important;
+   }
+   .active{
+     color: #1565c0 !important;
+   }
+   .description input:focus {
+     border-bottom: 1px solid #1565c0 !important;
+     box-shadow: 0 1px 0 0 #1565c0 !important;
+   }
+  .materialize-textarea:focus:not([readonly]){
+    border-bottom: 1px solid #1565c0 !important;
+    box-shadow: 0 1px 0 0 #1565c0 !important;
+  }
+  .textarea.materialize-textarea{
+    border-bottom: 1px solid #1565c0 !important;
+    box-shadow: 0 1px 0 0 #1565c0 !important;
+  }
+
+  .input:focus:not([type]), input:focus[type=text]:not(.browser-default), input:focus[type=password]:not(.browser-default), input:focus[type=email]:not(.browser-default), input:focus[type=url]:not(.browser-default), input:focus[type=time]:not(.browser-default), input:focus[type=date]:not(.browser-default),
+   textarea.materialize-textarea{
+    border-bottom: 1px solid #1565c0 !important;
+    box-shadow: 0 1px 0 0 #1565c0 !important;
+  }

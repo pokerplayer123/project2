@@ -35,7 +35,7 @@
 
 <template name="nav">
 
-  <nav class="amber nav-extended">
+  <nav class="grey darken-4 nav-extended">
     <div class="nav-wrapper">
       <a href="/" class="brand-logo">&nbsp;&nbsp;Pears&nbsp;&nbsp;</a>
       <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
@@ -412,8 +412,8 @@
         </div>
       </div>
       <div class="modal-footer">
-        <a class="modal-action modal-close waves-effect waves-green btn-flat">Close</a>
-        <button type="submit" id="submit-subforum" class="modal-action waves-effect waves-green btn-flat">Submit</button>
+        <a class="modal-action modal-close waves-effect waves-light btn-flat">Close</a>
+        <button type="submit" id="submit-subforum" class="modal-action waves-effect waves-light btn-flat">Submit</button>
       </div>
     </form>
   </div>
@@ -446,7 +446,7 @@
 
 <template name="subforum">
   <div class="col s12 m7">
-    <h2 class="header blue-text">{{subforum.subforumname}}</h2>
+    <h2 class="header text">{{subforum.subforumname}}</h2>
     <p>{{subforum.description}}</p>
 
     {{#if isOwner}}
@@ -470,7 +470,7 @@
     {{#if isSubforumClosed}}
     <!--  -->
     {{else}}
-    <div class="card  darken-1">
+    <div class="card darken-1">
       <div class="card-content ">
         <form id="create-thread">
           <p>Your Answer</p>
