@@ -336,6 +336,10 @@
           <option value="male" {{compareGender 'male'}}>Male</option>
           <option value="female" {{compareGender 'female'}}>Female</option>
         </select>
+        <label>Points</label>
+        <textarea readonly name="points" value="{{userProfile.points}}"></textarea>
+        
+        
         <!--  -->
         {{#if isTutor}}
         <!--  -->
@@ -413,7 +417,7 @@
       </div>
       <div class="modal-footer">
         <a class="modal-action modal-close waves-effect waves-light btn-flat">Close</a>
-        <button type="submit" id="submit-subforum" class="modal-action waves-effect waves-light btn-flat">Submit</button>
+        <button type="submit" id="submit-subforum" onclick="increment" class="modal-action waves-effect waves-light btn-flat">Submit</button>
       </div>
     </form>
   </div>
