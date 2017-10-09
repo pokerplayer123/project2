@@ -9,10 +9,9 @@ Meteor.methods({
     if(!Meteor.userId()) {
       throw new Meteor.Error('not-authorized');
     }
+    var currentUser = Meteor.user() ? Meteor.user().profile : {};
     var id= Threads.insert(thread);
-    var points;
-    increment();
-    Meteor.users.update({ _id: Meteor.userId() }, { $set: { points}} );
+    Meteor.users.update({ _id: Meteor.userId() }, { $inc: {"profile.points": +1}} );
     return id;
 
   },
@@ -25,8 +24,8 @@ Meteor.methods({
     Threads.remove(thread._id);
   }
 
-  
-  
+
+
 });
 
 //increase point
