@@ -6,6 +6,7 @@
   <title>Pears</title>
 
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.bundle.min.js"></script>
 </head>
 
 <template name="layout">
@@ -37,16 +38,23 @@
 
   <nav class="grey darken-4 nav-extended">
     <div class="nav-wrapper">
-        <img class="logo" width="55" height="55" src="/img/pear-logo-white-bg.png">
+      <img class="logo" width="55" height="55" src="/img/pear-logo-white-bg.png">
       <a href="/" class="brand-logo">&nbsp;&nbsp;Pears&nbsp;&nbsp;</a>
-      <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+      <a href="#" data-activates="mobile-demo" class="button-collapse">
+        <i class="material-icons">menu</i>
+      </a>
       <ul id="nav-mobile" class="right hide-on-med-and-down">
-        {{#if currentUser}}
-        {{#if isTutor}}
-        <li><a href="/my-tutorials">Classes</a></li>
-        <li><a href="/students">Students</a></li>
+        {{#if currentUser}} {{#if isTutor}}
+        <li>
+          <a href="/my-tutorials">Classes</a>
+        </li>
+        <li>
+          <a href="/students">Students</a>
+        </li>
         {{/if}}
-        <li><a href="/editProfile">Edit Profile</a></li>
+        <li>
+          <a href="/editProfile">Edit Profile</a>
+        </li>
         {{/if}}
         <li>
           {{> atNavButton}}
@@ -54,11 +62,17 @@
       </ul>
       <ul class="side-nav" id="mobile-demo">
         {{#if currentUser}}
-        <li><a href="/">Tutorials</a></li>
+        <li>
+          <a href="/">Tutorials</a>
+        </li>
         {{#if isTutor}}
-        <li><a href="/my-tutorials">My Tutorials</a></li>
+        <li>
+          <a href="/my-tutorials">My Tutorials</a>
+        </li>
         {{/if}}
-        <li><a href="/editProfile">Edit Profile</a></li>
+        <li>
+          <a href="/editProfile">Edit Profile</a>
+        </li>
         {{/if}}
         <li>
           {{> atNavButton}}
@@ -105,8 +119,8 @@
   {{#if isTutor}}
   <div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
     <a class="btn-floating btn-large waves-effect waves-light align-right modal-trigger" href="/tutorials/add">
-      <i class="material-icons">add</i
-    ></a>
+      <i class="material-icons">add</i>
+    </a>
   </div>
   {{/if}}
 </template>
@@ -118,26 +132,42 @@
         <img src="/img/unsw-logo-large.jpg">
       </div>
       <div class="card-content">
-        <span class="card-title activator grey-text text-darken-4">{{tutorialName}}<i class="material-icons right">more_vert</i></span>
+        <span class="card-title activator grey-text text-darken-4">{{tutorialName}}
+          <i class="material-icons right">more_vert</i>
+        </span>
       </div>
       <div class="card-reveal">
-        <span class="card-title grey-text text-darken-4">{{tutorialName}}<i class="material-icons right">close</i></span>
+        <span class="card-title grey-text text-darken-4">{{tutorialName}}
+          <i class="material-icons right">close</i>
+        </span>
         <dl class="row">
-          <dt class="col s4"><b>Course:</b></dt>
+          <dt class="col s4">
+            <b>Course:</b>
+          </dt>
           <dd class="col s8">{{courseName}}</dd>
         </dl>
         <dl class="row">
-          <dt class="col s4"><b>Start:</b></dt>
+          <dt class="col s4">
+            <b>Start:</b>
+          </dt>
           <dd class="col s8">{{startDate}} {{startTime}}</dd>
         </dl>
         <dl class="row">
-          <dt class="col s4"><b>End:</b></dt>
+          <dt class="col s4">
+            <b>End:</b>
+          </dt>
           <dd class="col s8">{{endDate}} {{endTime}}</dd>
         </dl>
       </div>
       <div class="card-action">
-        <a class="btn" href="/tutorials/{{_id}}">Detail</a> {{#if isOwner}}
-        <a class="delete-tutorial btn red"><i class="material-icons">delete</i></a> {{/if}}
+        <a class="btn" href="/tutorials/{{_id}}">Detail</a>
+        <!--  -->
+        {{#if isOwner}}
+        <a class="delete-tutorial btn red">
+          <i class="material-icons">delete</i>
+        </a>
+        <!--  -->
+        {{/if}}
       </div>
     </div>
   </div>
@@ -154,8 +184,8 @@
 
   <div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
     <a class="btn-floating btn-large waves-effect waves-light align-right modal-trigger" href="/tutorials/add">
-      <i class="material-icons">add</i
-    ></a>
+      <i class="material-icons">add</i>
+    </a>
   </div>
 </template>
 
@@ -191,19 +221,27 @@
         </div>
         <div class="card-content">
           <dl class="row">
-            <dt class="col s4"><b>Tutorial:</b></dt>
+            <dt class="col s4">
+              <b>Tutorial:</b>
+            </dt>
             <dd class="col s8">{{tutorialName}}</dd>
           </dl>
           <dl class="row">
-            <dt class="col s4"><b>Course:</b></dt>
+            <dt class="col s4">
+              <b>Course:</b>
+            </dt>
             <dd class="col s8">{{courseName}}</dd>
           </dl>
           <dl class="row">
-            <dt class="col s4"><b>Start:</b></dt>
+            <dt class="col s4">
+              <b>Start:</b>
+            </dt>
             <dd class="col s8">{{startDate}} {{startTime}}</dd>
           </dl>
           <dl class="row">
-            <dt class="col s4"><b>End:</b></dt>
+            <dt class="col s4">
+              <b>End:</b>
+            </dt>
             <dd class="col s8">{{endDate}} {{endTime}}</dd>
           </dl>
         </div>
@@ -228,37 +266,43 @@
 
       <div id="detail-section" style="display: {{detailSectionStyle}}" data-tutorial-id="{{_id}}" data-tutorial-owner="{{owner}}">
 
-        <div class="left-align"><h4>Request List</h4>
-        {{#if isTutor }}
-        <!-- -->
-        {{else}}
-
-        {{/if}}
-        <br>
-        <!-- -->
-        {{#if hasRequests}}
-        <ul class="collapsible" data-collapsible="expandable">
-          {{#each requests}} {{> requestItem }} {{/each}}
-        </ul>
-        {{else}}
-        <p>There are no requests yet.</p>
-
-        {{/if}}
         <div class="right-align">
-          <a class="btn waves-effect waves-light btn modal-trigger" id="create-request" href="#create-request-modal">New Request</a>
+          <a class="btn waves-effect waves-light" href="/tutorials/{{_id}}/tutor-dashboard">Tutor Dashboard</a>
         </div>
-      </div>
-          <div class="card">
-          <div class="card-image waves-effect waves-block waves-light">
-      <img width="500" height="300" src="/img/night-sky.jpg">
 
-      <span class="card-title"><h4> Forum </h4></span>
-    </div>
-    <div class="card-content right-align">
-      <a class="btn-large btn-floating waves-effect waves-blue right-align" id="view-forum" href="/tutorials/forum/{{_id}}"><i class="material-icons">pageview</i>
-      </a>
-    </div>
-      </div>
+        <div class="left-align">
+          <h4>Request List</h4>
+          {{#if isTutor }}
+          <!-- -->
+          {{else}} {{/if}}
+          <br>
+          <!-- -->
+          {{#if hasRequests}}
+          <ul class="collapsible" data-collapsible="expandable">
+            {{#each requests}} {{> requestItem }} {{/each}}
+          </ul>
+          {{else}}
+          <p>There are no requests yet.</p>
+
+          {{/if}}
+          <div class="right-align">
+            <a class="btn waves-effect waves-light btn modal-trigger" id="create-request" href="#create-request-modal">New Request</a>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-image waves-effect waves-block waves-light">
+            <img width="500" height="300" src="/img/night-sky.jpg">
+
+            <span class="card-title">
+              <h4> Forum </h4>
+            </span>
+          </div>
+          <div class="card-content right-align">
+            <a class="btn-large btn-floating waves-effect waves-blue right-align" id="view-forum" href="/tutorials/forum/{{_id}}">
+              <i class="material-icons">pageview</i>
+            </a>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -295,12 +339,16 @@
 <template name="requestItem">
   <li style="position: relative">
     {{#if isRequestOwnerOrTutorialOwner }}
-    <a class="btn-floating red delete-request"> <i class="material-icons">close</i></a>
+    <a class="btn-floating red delete-request">
+      <i class="material-icons">close</i>
+    </a>
     <!-- -->
     {{/if}}
     <div class="collapsible-header">
       <i class="material-icons">question_answer</i>
-      <span><b>{{question}}</b></span>
+      <span>
+        <b>{{question}}</b>
+      </span>
       <span style="flex-grow: 1;"></span>
       <span>{{ownerZid}}</span>
       <span class="date-label">{{fromNow}}</span>
@@ -365,7 +413,9 @@
 
     <h4>{{tutorial.tutorialName}}</h4>
     <div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
-      <a class="btn-large btn-floating waves-effect waves-light btn" id="create-subforum" href="#create-subforum-modal"><i class="material-icons">add</i></a>
+      <a class="btn-large btn-floating waves-effect waves-light btn" id="create-subforum" href="#create-subforum-modal">
+        <i class="material-icons">add</i>
+      </a>
     </div>
 
     <br>
@@ -384,16 +434,24 @@
         <h4>Sub-Forums</h4>
       </li>
       <li class="collection-item">
-        <div>Week1<a href="#!" class="secondary-content"></a></div>
+        <div>Week1
+          <a href="#!" class="secondary-content"></a>
+        </div>
       </li>
       <li class="collection-item">
-        <div>Week2<a href="#!" class="secondary-content"></a></div>
+        <div>Week2
+          <a href="#!" class="secondary-content"></a>
+        </div>
       </li>
       <li class="collection-item">
-        <div>Week3<a href="#!" class="secondary-content"></a></div>
+        <div>Week3
+          <a href="#!" class="secondary-content"></a>
+        </div>
       </li>
       <li class="collection-item">
-        <div>Week4<a href="#!" class="secondary-content"></a></div>
+        <div>Week4
+          <a href="#!" class="secondary-content"></a>
+        </div>
       </li>
     </ul>
     {{/if}}
@@ -498,19 +556,20 @@
       <p>{{question}}</p>
 
       {{#if isClosed}}
-        <div style="position: absolute;
+      <div style="position: absolute;
         top: 3px;
         right: 5px;
         background: #ee6e73;
         padding: 10px;
         color: #fff;
         border-radius: 3px;">
-            <p>Closed</p>
-        </div>
+        <p>Closed</p>
+      </div>
       {{/if}}
 
       <div class="small">
-        <p class="right-align"><i class="small material-icons right">access_time</i>{{fromNow}}</p>
+        <p class="right-align">
+          <i class="small material-icons right">access_time</i>{{fromNow}}</p>
         <p class="right-align">by {{ownerName}}</p>
       </div>
     </div>
@@ -526,10 +585,12 @@
 
 
 <template name="thread">
-  <div class="col s12 m7">
+  <div class="col s12">
     <h2 class="header text">{{thread.question}}</h2>
     <p class="right-align">created {{fromNow}}</p>
-    <p class="right-align">from subforum <b>{{subforum.subforumname}}</b></p>
+    <p class="right-align">from subforum
+      <b>{{subforum.subforumname}}</b>
+    </p>
 
     {{#if isOwner}}
     <div class="right-align">
@@ -575,23 +636,26 @@
     <div class="card-content ">
       <p>{{answer}}</p>
       {{#if isBestAnswer}}
-        <div style="position: absolute;
+      <div style="position: absolute;
         top: 3px;
         right: 5px;
         background: #ee6e73;
         padding: 10px;
         color: #fff;
         border-radius: 3px;">
-            <p>Best answer</p>
-        </div>
+        <p>Best answer</p>
+      </div>
       {{/if}}
       <div class="small">
-        <p class="right-align"><i class="small material-icons right">access_time</i>{{fromNow}}</p>
+        <p class="right-align">
+          <i class="small material-icons right">access_time</i>{{fromNow}}</p>
         <p class="right-align">by {{ownerName}}</p>
       </div>
       <div id="like" class="small">
-        <a class="btn"><i class="small material-icons left">thumb_up</i>like</a>
-        <a class="btn"><i class="small material-icons left">reply</i>reply</a>
+        <a class="btn">
+          <i class="small material-icons left">thumb_up</i>like</a>
+        <a class="btn">
+          <i class="small material-icons left">reply</i>reply</a>
 
       </div>
     </div>
@@ -614,6 +678,107 @@
   <hr>
 </template>
 
+<template name="tutorDashboard">
+  <br>
+  <div class="row">
+    <div class="col s12 m6">
+      <div class="card">
+        <div class="card-content">
+          <canvas id="topStudentsGraph" width="400" height="300"></canvas>
+        </div>
+      </div>
+      <br>
+      <div class="card">
+        <div class="card-content">
+          <canvas id="bottomStudentsGraph" width="400" height="300"></canvas>
+        </div>
+      </div>
+    </div>
+    <div class="col s12 m6">
+      <h4>Request List</h4>
+      {{#if hasRequests}}
+      <ul class="collapsible" data-collapsible="expandable">
+        {{#each requests}} {{> requestItem }} {{/each}}
+      </ul>
+      {{else}}
+      <p>There are no requests yet.</p>
+
+      {{/if}}
+    </div>
+  </div>
+
+
+
+  <script>
+    $('.collapsible').collapsible();
+
+    var allStudents = JSON.parse('{{students}}');
+    allStudents.sort(function (a, b) {
+      return b.profile.points - a.profile.points;
+    });
+
+    var topStudents = allStudents.slice(0, 5);
+    var bottomStudents = allStudents.slice(-5);
+
+    var topCtx = document.getElementById("topStudentsGraph").getContext('2d');
+    var topStudentsChart = new Chart(topCtx, {
+      type: 'bar',
+      data: {
+        labels: topStudents.map(function (stu) {
+          return stu.profile.firstname + ' ' + stu.profile.lastname
+        }),
+        datasets: [{
+          label: 'Top 5 students',
+          data: topStudents.map(function (stu) {
+            return stu.profile.points
+          }),
+          backgroundColor: topStudents.map(function (stu) {
+            return '#FFCD00'
+          })
+
+        }]
+      },
+      options: {
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero: true
+            }
+          }]
+        }
+      }
+    });
+
+    var bottomCtx = document.getElementById("bottomStudentsGraph").getContext('2d');
+    var bottomStudentsChart = new Chart(bottomCtx, {
+      type: 'bar',
+      data: {
+        labels: bottomStudents.map(function (stu) {
+          return stu.profile.firstname + ' ' + stu.profile.lastname
+        }),
+        datasets: [{
+          label: 'Bottom 5 students',
+          data: bottomStudents.map(function (stu) {
+            return stu.profile.points
+          }),
+          backgroundColor: bottomStudents.map(function (stu) {
+            return '#FFCD00'
+          })
+        }]
+      },
+      options: {
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero: true
+            }
+          }]
+        }
+      }
+    });
+  </script>
+
+</template>
 
 
 <template name="students">
@@ -622,10 +787,10 @@
     <li class="collection-item avatar">
       <i class="material-icons circle large">person</i>
       <span class="title">{{profile.firstname}} {{profile.lastname}}</span>
-  <p>{{profile.zid}} <br>
-    {{profile.degree}}
-  </p>
-</li>
-</ul>
+      <p>{{profile.zid}}
+        <br> {{profile.degree}}
+      </p>
+    </li>
+  </ul>
   {{/each}}
 </template>
