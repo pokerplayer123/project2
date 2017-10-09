@@ -462,6 +462,10 @@ Template.threadDetail.helpers({
   isBestAnswer: function() {
     var subforum = Subforums.findOne({_id: Router.current().params.subforumId});
     return subforum.bestAnswer == this._id;
+  },
+
+  points: function() {
+    return Meteor.user().profile.points;
   }
 });
 
