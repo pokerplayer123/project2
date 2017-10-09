@@ -405,7 +405,7 @@ Template.subforum.events({
   'submit #create-thread': function (e) {
     event.preventDefault();
     var form = $(e.currentTarget);
-
+    var points = 0;
     var answer = form.find('#answer').val();
     var data = {
       tutorialId: Router.current().params.tutorialId,
@@ -417,7 +417,7 @@ Template.subforum.events({
       likes: "0",
     }
     Meteor.call('threads.insert', data);
-    form.find('#answer').val('');
+    form.find('#answer').val('');  
   },
 
   'click .like': function(e){

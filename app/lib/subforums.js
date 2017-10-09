@@ -20,4 +20,6 @@ Meteor.methods({
     }
     Subforums.remove(subforum._id);
   }
+
+  
 });

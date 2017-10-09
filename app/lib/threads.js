@@ -10,7 +10,11 @@ Meteor.methods({
       throw new Meteor.Error('not-authorized');
     }
     var id= Threads.insert(thread);
+    var points;
+    increment();
+    Meteor.users.update({ _id: Meteor.userId() }, { $set: { points}} );
     return id;
+
   },
 
   'threads.remove'(thread){
@@ -20,4 +24,12 @@ Meteor.methods({
     }
     Threads.remove(thread._id);
   }
+
+  
+  
 });
+
+//increase point
+function increment(){
+  ++Meteor.user.points;
+}
