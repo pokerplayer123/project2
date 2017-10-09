@@ -12,7 +12,7 @@ Meteor.methods({
     var id = Answers.insert(thread);
     var points;
     increment();
-    Meteor.users.update({ _id: Meteor.userId() }, { $set: { points } });
+    Meteor.users.update({ _id: Meteor.userId() }, { $inc: {"profile.points": +0.25}} );
     return id;
 
   },
