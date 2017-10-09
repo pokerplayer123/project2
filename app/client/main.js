@@ -67,10 +67,30 @@ Router.route('/tutorials/forum/:tutorialId/subforum/:subforumId', {
   }
 })
 
+Router.route('/students', {
+  template: 'students',
+  users: function (){
+    Meteor.users.find().forEach(function(oneUser) {
+			console.log(oneUser);
+		})
+
+		return Meteor.users.find();
+  }
+});
+
+
+
 /**
  * For Each template, binding javascripts
  */
-
+Template.students.helpers({
+  isStudent: function () {
+    return getLoginUserProfile().userType == 'student';
+  },
+  userProfile: function () {
+    return Meteor.user().profile;
+  },
+});
 // -----------------------------------------
 // templte nav start
 // -----------------------------------------
@@ -393,10 +413,16 @@ Template.subforum.events({
       answer: answer,
       owner: Meteor.user()._id,
       ownerName: getLoginUserFullname(),
-      createdAt: new Date()
+      createdAt: new Date(),
+      likes: "0",
     }
     Meteor.call('threads.insert', data);
     form.find('#answer').val('');
+  },
+
+  'click .like': function(e){
+    //on click add a like to post and add the user to the array of "likers"
+    //If user has already liked the post, toggle text to "unlike" and remove from array
   },
 
   'click .close-subforum': function(e) {

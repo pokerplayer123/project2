@@ -37,13 +37,14 @@
 
   <nav class="grey darken-4 nav-extended">
     <div class="nav-wrapper">
+        <img class="logo" width="55" height="55" src="/img/pear-logo-white-bg.png">
       <a href="/" class="brand-logo">&nbsp;&nbsp;Pears&nbsp;&nbsp;</a>
       <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
       <ul id="nav-mobile" class="right hide-on-med-and-down">
         {{#if currentUser}}
-        <li><a href="/">Tutorials</a></li>
         {{#if isTutor}}
-        <li><a href="/my-tutorials">My Tutorials</a></li>
+        <li><a href="/my-tutorials">Classes</a></li>
+        <li><a href="/students">Students</a></li>
         {{/if}}
         <li><a href="/editProfile">Edit Profile</a></li>
         {{/if}}
@@ -254,7 +255,7 @@
       <span class="card-title"><h4> Forum </h4></span>
     </div>
     <div class="card-content right-align">
-      <a class="btn-large btn-floating waves-effect waves-light right-align" id="view-forum" href="/tutorials/forum/{{_id}}"><i class="material-icons">pageview</i>
+      <a class="btn-large btn-floating waves-effect waves-blue right-align" id="view-forum" href="/tutorials/forum/{{_id}}"><i class="material-icons">pageview</i>
       </a>
     </div>
       </div>
@@ -280,8 +281,8 @@
         </div>
       </div>
       <div class="modal-footer">
-        <a class="modal-action modal-close waves-effect waves-green btn-flat">Close</a>
-        <button type="submit" id="submit-request" class="modal-action waves-effect waves-green btn-flat">Submit</button>
+        <a class="modal-action modal-close waves-effect btn-flat">Close</a>
+        <button type="submit" id="submit-request" class="modal-action waves-effect btn-flat">Submit</button>
       </div>
     </form>
   </div>
@@ -478,7 +479,7 @@
             <textarea id="answer" name="answer" class="materialize-textarea"></textarea>
             <label for="answer">Write your response here</label>
           </div>
-          <button type="submit" class="waves-effect waves-light btn">Submit</button>
+          <button type="submit" class="waves-effect waves-light waves-ripple waves-blue btn">Submit</button>
         </form>
       </div>
     </div>
@@ -510,7 +511,7 @@
         <p class="right-align"><i class="small material-icons right">access_time</i>{{fromNow}}</p>
         <p class="right-align">by {{ownerName}}</p>
       </div>
-      <div class="small">
+      <div id="like" class="small">
         <a class="btn"><i class="small material-icons left">thumb_up</i>like</a>
         <a class="btn"><i class="small material-icons left">reply</i>reply</a>
 
@@ -533,4 +534,18 @@
     {{/if}}
   </div>
   <hr>
+</template>
+
+<template name="students">
+  {{#each users}}
+  <ul class="collection">
+      <li class="collection-item avatar">
+        <img src="images/yuna.jpg" alt="" class="circle">
+        <span class="title">Title</span>
+        <p>{{userProfile.firstname}} <br>
+           {{userProfile.lastname}}
+        </p>
+      </li>
+    </ul>
+    {{/each}}
 </template>

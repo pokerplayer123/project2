@@ -94,3 +94,16 @@ action.button {
     border-bottom: 1px solid #1565c0 !important;
     box-shadow: 0 1px 0 0 #1565c0 !important;
   }
+
+  .waves-effect.waves-blue .waves-ripple {
+     /* The alpha value allows the text and background color
+     of the button to still show through. */
+      background-color: #1565c0;
+    }
+  .blue {
+    background:color: #1565c0;
+  }
+  .logo {
+    margin-left: 10px;
+    margin-top: 10px;
+  }
