@@ -11,7 +11,7 @@ Meteor.methods({
     }
     var currentUser = Meteor.user() ? Meteor.user().profile : {};
     var id= Threads.insert(thread);
-    Meteor.users.update({ _id: Meteor.userId() }, { $inc: {"profile.points": +1}} );
+    Meteor.users.update({ _id: Meteor.userId() }, { $inc: {"profile.points": +0.25}} );
     return id;
 
   },
