@@ -83,12 +83,10 @@ Router.route('/students', {
 /**
  * For Each template, binding javascripts
  */
+ //return list of students by last name
 Template.students.helpers({
-  isStudent: function () {
-    return getLoginUserProfile().userType == 'student';
-  },
-  userProfile: function () {
-    return Meteor.user().profile;
+  users: function () {
+    return Meteor.users.find({"profile.userType": "student"}, {sort: {lastname: -1}});
   },
 });
 // -----------------------------------------
@@ -417,7 +415,7 @@ Template.subforum.events({
       likes: "0",
     }
     Meteor.call('threads.insert', data);
-    form.find('#answer').val('');  
+    form.find('#answer').val('');
   },
 
   'click .like': function(e){

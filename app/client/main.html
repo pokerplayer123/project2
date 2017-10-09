@@ -339,8 +339,8 @@
         </select>
         <label>Points</label>
         <textarea readonly name="points" value="{{userProfile.points}}"></textarea>
-        
-        
+
+
         <!--  -->
         {{#if isTutor}}
         <!--  -->
@@ -541,15 +541,15 @@
 </template>
 
 <template name="students">
-  {{#each users}}
+  {{# each users}}
   <ul class="collection">
-      <li class="collection-item avatar">
-        <img src="images/yuna.jpg" alt="" class="circle">
-        <span class="title">Title</span>
-        <p>{{userProfile.firstname}} <br>
-           {{userProfile.lastname}}
-        </p>
-      </li>
-    </ul>
-    {{/each}}
+    <li class="collection-item avatar">
+      <i class="material-icons circle large">person</i>
+      <span class="title">{{profile.firstname}} {{profile.lastname}}</span>
+  <p>{{profile.zid}} <br>
+    {{profile.degree}}
+  </p>
+</li>
+</ul>
+  {{/each}}
 </template>
