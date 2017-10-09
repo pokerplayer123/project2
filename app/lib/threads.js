@@ -27,8 +27,3 @@ Meteor.methods({
 
 
 });
-
-//increase point
-function increment(){
-  ++Meteor.user.points;
-}
