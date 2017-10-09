@@ -441,7 +441,7 @@
           <p>{{description}}</p>
         </div>
         <div class="card-action">
-          <a href="/tutorials/forum/{{tutorialId}}/subforum/{{_id}}">View</a> {{#if isOwner}}
+          <a href="/tutorials/forum/{{tutorialId}}/subforum/{{_id}}">View Subforum</a> {{#if isOwner}}
           <a href="#" class="delete-subforum">Delete</a> {{/if}}
         </div>
       </div>
@@ -457,10 +457,10 @@
     {{#if isOwner}}
     <div class="right-align">
       {{#if isSubforumClosed}}
-      <a href="#" class="waves-effect waves-light btn open-subforum">Open This Question</a>
+      <!-- <a href="#" class="waves-effect waves-light btn open-subforum">Open This Question</a> -->
       <!--  -->
       {{else}}
-      <a href="#" class="waves-effect waves-light btn close-subforum">Close This Question</a>
+      <!-- <a href="#" class="waves-effect waves-light btn close-subforum">Close This Question</a> -->
       <!--  -->
       {{/if}}
     </div>
@@ -470,7 +470,7 @@
 
     <hr>
     <!--  -->
-    {{#each threads}} {{> threadDetail }} {{/each}}
+    {{#each threads}} {{> threadCard }} {{/each}}
     <!--  -->
     {{#if isSubforumClosed}}
     <!--  -->
@@ -478,6 +478,83 @@
     <div class="card darken-1">
       <div class="card-content ">
         <form id="create-thread">
+          <p>Post a new thread</p>
+          <div class="input-field">
+            <textarea id="answer" name="answer" class="materialize-textarea"></textarea>
+            <label for="answer">Write your question here</label>
+          </div>
+          <button type="submit" class="waves-effect waves-light waves-ripple waves-blue btn">Submit</button>
+        </form>
+      </div>
+    </div>
+    <!--  -->
+    {{/if}}
+  </div>
+</template>
+
+<template name="threadCard">
+  <div class="card darken-1">
+    <div class="card-content ">
+      <p>{{question}}</p>
+
+      {{#if isClosed}}
+        <div style="position: absolute;
+        top: 3px;
+        right: 5px;
+        background: #ee6e73;
+        padding: 10px;
+        color: #fff;
+        border-radius: 3px;">
+            <p>Closed</p>
+        </div>
+      {{/if}}
+
+      <div class="small">
+        <p class="right-align"><i class="small material-icons right">access_time</i>{{fromNow}}</p>
+        <p class="right-align">by {{ownerName}}</p>
+      </div>
+    </div>
+    <div class="card-action">
+      <a href="/tutorials/forum/{{tutorialId}}/subforum/{{subforumId}}/thread/{{_id}}">View Thread</a>
+      {{#if isSubforumOwner}}
+      <a class="delete-thread" href="#">Delete</a>
+      {{/if}}
+    </div>
+  </div>
+  <hr>
+</template>
+
+
+<template name="thread">
+  <div class="col s12 m7">
+    <h2 class="header text">{{thread.question}}</h2>
+    <p class="right-align">created {{fromNow}}</p>
+    <p class="right-align">from subforum <b>{{subforum.subforumname}}</b></p>
+    
+    {{#if isOwner}}
+    <div class="right-align">
+      {{#if isThreadClosed}}
+      <a href="#" class="waves-effect waves-light btn open-thread">Open this thread</a>
+      <!--  -->
+      {{else}}
+      <a href="#" class="waves-effect waves-light btn close-thread">Close this thread</a>
+      <!--  -->
+      {{/if}}
+    </div>
+    {{/if}}
+
+    <br>
+
+    <hr>
+    <!--  -->
+    {{#each answers}} {{> answerCard }} {{/each}}
+    <!--  -->
+    {{#if isThreadClosed}}
+    <!--  -->
+    {{else}}
+    <div class="card darken-1">
+      <div class="card-content ">
+        <form id="create-answer-form">
           <p>Your Answer</p>
           <div class="input-field">
             <textarea id="answer" name="answer" class="materialize-textarea"></textarea>
@@ -489,14 +566,11 @@
     </div>
     <!--  -->
     {{/if}}
-
-
-
   </div>
 </template>
 
 
-<template name="threadDetail">
+<template name="answerCard">
   <div class="card darken-1">
     <div class="card-content ">
       <p>{{answer}}</p>
@@ -523,7 +597,7 @@
     </div>
     {{#if isOwner}}
     <div class="card-action">
-      {{#if isSubforumOwner}}
+      {{#if isThreadOwner}}
       <!--  -->
       {{#if isBestAnswer}}
       <!--  -->
@@ -533,12 +607,14 @@
       {{/if}}
       <!--  -->
       {{/if}}
-      <a class="delete-thread" href="#">Delete</a>
+      <a class="delete-answer" href="#">Delete</a>
     </div>
     {{/if}}
   </div>
   <hr>
 </template>
+
+
 
 <template name="students">
   {{#each users}}
