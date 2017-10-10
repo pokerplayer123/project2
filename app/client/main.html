@@ -266,9 +266,11 @@
 
       <div id="detail-section" style="display: {{detailSectionStyle}}" data-tutorial-id="{{_id}}" data-tutorial-owner="{{owner}}">
 
+        {{#if isOwner }}
         <div class="right-align">
           <a class="btn waves-effect waves-light" href="/tutorials/{{_id}}/tutor-dashboard">Tutor Dashboard</a>
         </div>
+        {{/if}}
 
         <div class="left-align">
           <h4>Request List</h4>
