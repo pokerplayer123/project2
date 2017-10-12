@@ -107,3 +107,10 @@ action.button {
     margin-left: 10px;
     margin-top: 10px;
   }
+  .btn-flat{
+    color: #1565c0 !important;
+
+  }
+  .delete{
+    color: red !important;
+  }
