@@ -754,7 +754,11 @@ Template.answerCard.events({
       points: oldProfile.points + 2 * (rating - oldRating) / 5
     });
 
-    Meteor.users.update({ _id: owner._id }, { $inc: { "profile.points": 2 * (rating - oldRating) / 5 } });
+    if (newProfile.points < 0) {
+      newProfile.points = 0;
+    }
+
+    Meteor.users.update({ _id: owner._id }, { $set: { "profile": newProfile } });
   }
 });
 
