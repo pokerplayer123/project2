@@ -148,7 +148,6 @@ action.button {
   label.star:before {
     content: '\f006';
     font-family: FontAwesome;
->>>>>>> c42f6c4b11b4c41c16b0ba37b0f1830dc2d02870
   }
 
   .btn-flat{
