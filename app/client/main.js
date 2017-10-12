@@ -647,6 +647,7 @@ Template.thread.events({
       owner: Meteor.user()._id,
       ownerName: getLoginUserFullname(),
       createdAt: new Date(),
+      rating: 0,
       isClosed: false
     });
     $('#answer').val('');
@@ -665,6 +666,13 @@ Template.thread.events({
 Template.answerCard.helpers({
   'fromNow': function () {
     return moment(this.createdAt).fromNow();
+  },
+
+  isTutorialOwner: function () {
+    var tutor = Tutorials.findOne({
+      _id: Router.current().params.tutorialId
+    });
+    return this.tutorialId == tutor._id;
   },
 
   isOwner: function () {
@@ -702,6 +710,33 @@ Template.answerCard.events({
     }, {
       $set: {
         bestAnswer: this._id
+      }
+    });
+  },
+
+  'change input.star': function (e) {
+    var rating = parseInt($(e.target).val());
+    Answers.update({
+      _id: this._id
+    }, {
+      $set: {
+        rating: rating
+      }
+    });
+    var owner = Meteor.users.findOne({
+      '_id': this.owner,
+    });
+
+    var oldProfile = owner.profile;
+    var newProfile = Object.assign(oldProfile, {
+      points: owner.profile.points + 2 * rating / 5
+    });
+    debugger
+    Meteor.users.update({
+      _id: owner._id
+    }, {
+      $set: {
+        profile: newProfile
       }
     });
   }
