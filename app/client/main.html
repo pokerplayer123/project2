@@ -663,15 +663,15 @@
 
         {{#if isTutorialOwner }}
         <div class="stars">
-          <input class="star star-5" id="star-5-{{_id}}" type="radio" name="star-{{_id}}" value="5" />
+          <input class="star star-5" id="star-5-{{_id}}" type="radio" name="star-{{_id}}" value="5" {{checkedStar5}}/>
           <label class="star star-5" for="star-5-{{_id}}"></label>
-          <input class="star star-4" id="star-4-{{_id}}" type="radio" name="star-{{_id}}" value="4" />
+          <input class="star star-4" id="star-4-{{_id}}" type="radio" name="star-{{_id}}" value="4" {{checkedStar4}}/>
           <label class="star star-4" for="star-4-{{_id}}"></label>
-          <input class="star star-3" id="star-3-{{_id}}" type="radio" name="star-{{_id}}" value="3" checked />
+          <input class="star star-3" id="star-3-{{_id}}" type="radio" name="star-{{_id}}" value="3" {{checkedStar3}} />
           <label class="star star-3" for="star-3-{{_id}}"></label>
-          <input class="star star-2" id="star-2-{{_id}}" type="radio" name="star-{{_id}}" value="2" />
+          <input class="star star-2" id="star-2-{{_id}}" type="radio" name="star-{{_id}}" value="2" {{checkedStar2}}/>
           <label class="star star-2" for="star-2-{{_id}}"></label>
-          <input class="star star-1" id="star-1-{{_id}}" type="radio" name="star-{{_id}}" value="1" />
+          <input class="star star-1" id="star-1-{{_id}}" type="radio" name="star-{{_id}}" value="1" {{checkedStar1}}/>
           <label class="star star-1" for="star-1-{{_id}}"></label>
         </div>
         {{/if}}
@@ -749,7 +749,7 @@
         datasets: [{
           label: 'Top 5 students',
           data: topStudents.map(function (stu) {
-            return stu.profile.points
+            return stu.profile.points.toFixed(2)
           }),
           backgroundColor: topStudents.map(function (stu) {
             return '#FFCD00'
@@ -778,7 +778,7 @@
         datasets: [{
           label: 'Bottom 5 students',
           data: bottomStudents.map(function (stu) {
-            return stu.profile.points
+            return stu.profile.points.toFixed(2)
           }),
           backgroundColor: bottomStudents.map(function (stu) {
             return '#FFCD00'

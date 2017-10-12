@@ -101,7 +101,7 @@ action.button {
       background-color: #1565c0;
     }
   .blue {
-    background:color: #1565c0;
+    background-color: #1565c0;
   }
   .logo {
     margin-left: 10px;
@@ -114,7 +114,6 @@ action.button {
 
 
   div.stars {
-    width: 270px;
     display: inline-block;
   }
   
