@@ -22,8 +22,6 @@ import {
 } from '../lib/answers.js';
 import './main.html';
 
-
-
 /**
  * Router Configuration Starts
  */
@@ -34,7 +32,7 @@ Router.configure({
 
 Router.route('/', {
   template: 'tutorials',
-  data: function () {}
+  data: function () { }
 });
 
 Router.route('/Insert-Password', {
@@ -146,10 +144,10 @@ Template.students.helpers({
     return Meteor.users.find({
       'profile.userType': 'student'
     }, {
-      sort: {
-        lastname: -1
-      }
-    });
+        sort: {
+          lastname: -1
+        }
+      });
   },
 });
 // -----------------------------------------
@@ -298,10 +296,10 @@ Template.tutorialDetail.helpers({
     var requests = Requests.find({
       tutorialId: this._id
     }, {
-      sorted: {
-        createdAt: -1
-      }
-    });
+        sorted: {
+          createdAt: -1
+        }
+      });
     return requests
   },
   'hasRequests': function () {
@@ -398,10 +396,10 @@ Template.forum.helpers({
     return Subforums.find({
       tutorialId: this.tutorialId
     }, {
-      sorted: {
-        createdAt: -1
-      }
-    });
+        sorted: {
+          createdAt: -1
+        }
+      });
   },
   'hasSubforums': function () {
     return Subforums.find({
@@ -514,10 +512,10 @@ Template.subforum.events({
     Subforums.update({
       _id: this.subforum._id
     }, {
-      $set: {
-        isClosed: true
-      }
-    });
+        $set: {
+          isClosed: true
+        }
+      });
   },
 
   'click .open-subforum': function (e) {
@@ -525,10 +523,10 @@ Template.subforum.events({
     Subforums.update({
       _id: this.subforum._id
     }, {
-      $set: {
-        isClosed: false
-      }
-    });
+        $set: {
+          isClosed: false
+        }
+      });
   }
 });
 
@@ -584,10 +582,10 @@ Template.threadCard.events({
     Subforums.update({
       _id: subforum._id
     }, {
-      $set: {
-        bestAnswer: this._id
-      }
-    });
+        $set: {
+          bestAnswer: this._id
+        }
+      });
   }
 });
 
@@ -600,7 +598,7 @@ Template.threadCard.events({
 // -----------------------------------------
 Template.thread.helpers({
   'fromNow': function () {
-    return moment(this.createdAt).fromNow();
+    return moment(this.thread.createdAt).fromNow();
   },
 
   isThreadClosed: function () {
@@ -619,10 +617,10 @@ Template.thread.events({
     Threads.update({
       _id: this.thread._id
     }, {
-      $set: {
-        isClosed: true
-      }
-    });
+        $set: {
+          isClosed: true
+        }
+      });
   },
 
   'click .open-thread': function (e) {
@@ -630,10 +628,10 @@ Template.thread.events({
     Threads.update({
       _id: this.thread._id
     }, {
-      $set: {
-        isClosed: false
-      }
-    });
+        $set: {
+          isClosed: false
+        }
+      });
   },
 
   'submit #create-answer-form': function (event) {
@@ -647,6 +645,7 @@ Template.thread.events({
       owner: Meteor.user()._id,
       ownerName: getLoginUserFullname(),
       createdAt: new Date(),
+      rating: 0,
       isClosed: false
     });
     $('#answer').val('');
@@ -667,6 +666,13 @@ Template.answerCard.helpers({
     return moment(this.createdAt).fromNow();
   },
 
+  isTutorialOwner: function () {
+    var tutor = Tutorials.findOne({
+      _id: Router.current().params.tutorialId
+    });
+    return this.tutorialId == tutor._id;
+  },
+
   isOwner: function () {
     return this.owner == Meteor.user()._id;
   },
@@ -683,7 +689,28 @@ Template.answerCard.helpers({
       _id: Router.current().params.threadId
     });
     return thread.bestAnswer == this._id;
-  }
+  },
+
+  checkedStar1: function () {
+    return this.rating == 1 ? 'checked' : '';
+  },
+
+  checkedStar2: function () {
+    return this.rating == 2 ? 'checked' : '';
+  },
+
+  checkedStar3: function () {
+    return this.rating == 3 ? 'checked' : '';
+  },
+
+  checkedStar4: function () {
+    return this.rating == 4 ? 'checked' : '';
+  },
+
+  checkedStar5: function () {
+    return this.rating == 5 ? 'checked' : '';
+  },
+
 });
 
 Template.answerCard.events({
@@ -700,10 +727,38 @@ Template.answerCard.events({
     Threads.update({
       _id: thread._id
     }, {
-      $set: {
-        bestAnswer: this._id
-      }
+        $set: {
+          bestAnswer: this._id
+        }
+      });
+  },
+
+  'change input.star': function (e) {
+    var oldRating = this.rating || 0;
+    var rating = parseInt($(e.target).val());
+
+    Answers.update({
+      _id: this._id
+    }, {
+        $set: {
+          rating: rating
+        }
+      });
+
+    var owner = Meteor.users.findOne({
+      '_id': this.owner,
     });
+
+    var oldProfile = owner.profile;
+    var newProfile = Object.assign(oldProfile, {
+      points: oldProfile.points + 2 * (rating - oldRating) / 5
+    });
+
+    if (newProfile.points < 0) {
+      newProfile.points = 0;
+    }
+
+    Meteor.users.update({ _id: owner._id }, { $set: { "profile": newProfile } });
   }
 });
 
@@ -749,10 +804,10 @@ Template.editProfile.events({
     Meteor.users.update({
       _id: Meteor.userId()
     }, {
-      $set: {
-        profile: newProfile
-      }
-    });
+        $set: {
+          profile: newProfile
+        }
+      });
     return false;
   }
 });
@@ -802,10 +857,10 @@ Template.tutorDashboard.helpers({
         '$in': ownerIds
       }
     }, {
-      sorted: {
-        'profile.points': -1
-      }
-    });
+        sorted: {
+          'profile.points': -1
+        }
+      });
     return JSON.stringify(students.map(function (student) {
       return student;
     }));
@@ -815,10 +870,10 @@ Template.tutorDashboard.helpers({
     var requests = Requests.find({
       tutorialId: this.tutorial._id
     }, {
-      sorted: {
-        createdAt: -1
-      }
-    });
+        sorted: {
+          createdAt: -1
+        }
+      });
     return requests
   },
   'hasRequests': function () {

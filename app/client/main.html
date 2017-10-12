@@ -6,6 +6,7 @@
   <title>Pears</title>
 
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.bundle.min.js"></script>
 </head>
 
@@ -352,7 +353,7 @@
       <span style="flex-grow: 1;"></span>
       <span>{{ownerZid}}</span>
       <span class="date-label">{{fromNow}}</span>
-      <i class="material-icons" style="2rem">keyboard_arrow_down</i>
+      <i class="material-icons">keyboard_arrow_down</i>
     </div>
     <div class="collapsible-body" style="padding: 0.5rem 1rem">
       <p>
@@ -613,6 +614,7 @@
     <!--  -->
     {{/if}}
   </div>
+
 </template>
 
 
@@ -641,6 +643,21 @@
           <i class="small material-icons left">thumb_up</i>like</a>
         <a class="btn">
           <i class="small material-icons left">reply</i>reply</a>
+
+        {{#if isTutorialOwner }}
+        <div class="stars">
+          <input class="star star-5" id="star-5-{{_id}}" type="radio" name="star-{{_id}}" value="5" {{checkedStar5}}/>
+          <label class="star star-5" for="star-5-{{_id}}"></label>
+          <input class="star star-4" id="star-4-{{_id}}" type="radio" name="star-{{_id}}" value="4" {{checkedStar4}}/>
+          <label class="star star-4" for="star-4-{{_id}}"></label>
+          <input class="star star-3" id="star-3-{{_id}}" type="radio" name="star-{{_id}}" value="3" {{checkedStar3}} />
+          <label class="star star-3" for="star-3-{{_id}}"></label>
+          <input class="star star-2" id="star-2-{{_id}}" type="radio" name="star-{{_id}}" value="2" {{checkedStar2}}/>
+          <label class="star star-2" for="star-2-{{_id}}"></label>
+          <input class="star star-1" id="star-1-{{_id}}" type="radio" name="star-{{_id}}" value="1" {{checkedStar1}}/>
+          <label class="star star-1" for="star-1-{{_id}}"></label>
+        </div>
+        {{/if}}
 
       </div>
     </div>
@@ -715,7 +732,7 @@
         datasets: [{
           label: 'Top 5 students',
           data: topStudents.map(function (stu) {
-            return stu.profile.points
+            return stu.profile.points.toFixed(2)
           }),
           backgroundColor: topStudents.map(function (stu) {
             return '#FFCD00'
@@ -744,7 +761,7 @@
         datasets: [{
           label: 'Bottom 5 students',
           data: bottomStudents.map(function (stu) {
-            return stu.profile.points
+            return stu.profile.points.toFixed(2)
           }),
           backgroundColor: bottomStudents.map(function (stu) {
             return '#FFCD00'
