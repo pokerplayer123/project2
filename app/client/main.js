@@ -118,6 +118,9 @@ Router.route('/tutorials/:tutorialId/tutor-dashboard', {
       threads: Threads.find({
         tutorialId: this.params.tutorialId
       }),
+      meteorUser: Meteor.users.findOne({
+        _id: this.params.id
+      }),
     }
   }
 })
@@ -145,7 +148,7 @@ Template.students.helpers({
       'profile.userType': 'student'
     }, {
         sort: {
-          lastname: -1
+          "profile.lastname": +1
         }
       });
   },
@@ -839,6 +842,12 @@ Template.search.helpers({
 // -----------------------------------------
 
 Template.tutorDashboard.helpers({
+  isStudent: function () {
+    return getLoginUserProfile().userType == 'student';
+  },
+  userProfile: function () {
+    return Meteor.user().profile;
+  },
   students: function () {
     // select the students who answers any question in this forum
     var answerOwnerIds = this.answers.map(function (answer) {

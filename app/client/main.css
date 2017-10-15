@@ -1,5 +1,8 @@
 /* CSS declarations go here */
-
+body{
+  background-color: #EEEEEE;
+  font-size: ;
+}
 input[type="search"]{
     height: 96px !important;
 }
@@ -7,10 +10,12 @@ input[type="search"]{
 action.button {
     position: relative;
 }
-
+.nav{
+  font-size: 1.25rem;
+}
 @media (max-width: 500px) {
     nav .brand-logo {
-        font-size: 20px;
+        font-size: 24pt;
     }
 }
 
@@ -156,4 +161,7 @@ action.button {
   }
   .delete{
     color: red !important;
+  }
+  .text-24px{
+    font-size: 24px;
   }
