@@ -669,6 +669,13 @@ Template.answerCard.helpers({
     return moment(this.createdAt).fromNow();
   },
 
+  isThreadOwner2: function () {
+    var thread = Threads.findOne({
+      _id: Router.current().params.threadId
+    });
+    return  Meteor.user()._id == thread.owner && Meteor.user()._id != this.owner;
+  },
+
   isTutorialOwner: function () {
     var tutor = Tutorials.findOne({
       _id: Router.current().params.tutorialId
