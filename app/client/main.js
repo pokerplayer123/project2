@@ -163,6 +163,9 @@ Template.nav.helpers({
   isTutor: function () {
     return getLoginUserProfile().userType == 'tutor';
   },
+  isStudent: function () {
+    return getLoginUserProfile().userType == 'student';
+  },
 });
 // -----------------------------------------
 // templte nav end
