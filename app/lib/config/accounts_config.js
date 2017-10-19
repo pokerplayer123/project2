@@ -57,7 +57,7 @@ AccountsTemplates.addFields([
     _id: "degree",
     type: "text",
     displayName: "Degree",
-    required: true,
+    required: false,
   },
 
   {
@@ -130,8 +130,8 @@ AccountsTemplates.configure({
   showResendVerificationEmailLink: false,
 
   // Client-side Validation
-  continuousValidation: false,
-  negativeFeedback: false,
+  continuousValidation: true,
+  negativeFeedback: true,
   negativeValidation: true,
   positiveValidation: true,
   positiveFeedback: true,
@@ -161,6 +161,11 @@ AccountsTemplates.configure({
     },
     errors: {
       loginForbidden: "error.accounts.Login failed"
+    },
+    inputIcons: {
+              isValidating: "fa fa-spinner fa-spin",
+              hasSuccess: "fa fa-check",
+              hasError: "fa fa-times",
     },
   },
 });

@@ -152,6 +152,9 @@ Template.students.helpers({
         }
       });
   },
+  userEmail: function () {
+    return Meteor.user().emails ? Meteor.user().emails[0].address : null;
+  },
 });
 // -----------------------------------------
 // templte nav start
@@ -199,7 +202,12 @@ Template.myTutorials.helpers({
     return Tutorials.find({
       owner: Meteor.user()._id
     });
-  }
+  },
+  'hasTutorials': function () {
+    return Tutorials.find({
+      owner: Meteor.user()._id
+    }).count() > 0;
+  },
 });
 
 // -----------------------------------------
@@ -245,6 +253,9 @@ Template.addTutorial.events({
     // Close modal
     Router.go('/tutorials');
     return false;
+  },
+  'click .cancel': function(){
+    Router.go('/');
   }
 });
 
