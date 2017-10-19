@@ -666,11 +666,9 @@
         <p>Best answer</p>
       </div>
       {{/if}}
-      {{/if}} 
       <!--  -->
-      {{#if isThreadOwner2 }}
+
       <div class="small right-align">
-<<<<<<< HEAD
           <p class="stars right-align" style="right: 10px;">
             <input class="star star-5" id="star-5-{{_id}}" type="radio" name="star-{{_id}}" value="5" {{checkedStar5}}/>
             <label class="star star-5" for="star-5-{{_id}}"></label>
@@ -696,46 +694,11 @@
           <i class="small material-icons left">thumb_up</i>like</a>
         <a class="btn">
           <i class="small material-icons left">reply</i>reply</a>
-
-
-        {{#if isThreadOwner2 }}
-        <div class="stars">
-        <p class="stars right-align" style="right: 10px;">
-          <input class="star star-5" id="star-5-{{_id}}" type="radio" name="star-{{_id}}" value="5" {{checkedStar5}}/>
-          <label class="star star-5" for="star-5-{{_id}}"></label>
-          <input class="star star-4" id="star-4-{{_id}}" type="radio" name="star-{{_id}}" value="4" {{checkedStar4}}/>
-          <label class="star star-4" for="star-4-{{_id}}"></label>
-          <input class="star star-3" id="star-3-{{_id}}" type="radio" name="star-{{_id}}" value="3" {{checkedStar3}} />
-          <label class="star star-3" for="star-3-{{_id}}"></label>
-          <input class="star star-2" id="star-2-{{_id}}" type="radio" name="star-{{_id}}" value="2" {{checkedStar2}}/>
-          <label class="star star-2" for="star-2-{{_id}}"></label>
-          <input class="star star-1" id="star-1-{{_id}}" type="radio" name="star-{{_id}}" value="1" {{checkedStar1}}/>
-          <label class="star star-1" for="star-1-{{_id}}"></label>
-<<<<<<< HEAD
-        </div>
-        {{/if}}
-=======
           <br>
-        </p>
+
         <br>
       </div>
-      {{/if}}
 
-      <div class="right-align">
-
-        <p>{{fromNow}}
-          <i class="small material-icons right">access_time</i>
-          <br> by {{ownerName}}
-        </p>
-      </div>
-
-      <div id="like" class="small">
-        <a class="btn">
-          <i class="small material-icons left">thumb_up</i>like</a>
-        <a class="btn">
-          <i class="small material-icons left">reply</i>reply</a>
->>>>>>> e95fca1f80714e86bd6df9cbffa5afaac7811cf3
-      </div>
     </div>
     <div class="card-action">
       {{#if isThreadOwner}}
@@ -758,19 +721,6 @@
 
 <template name="tutorDashboard">
   <div class="row">
-
-        <div class="col s12 m6">
-          <div class="card small blue darken-3" style="top: 2.5rem">
-            <div class="card-content white-text">
-              <span class="card-title center-align" style="font-size: 36px">My Points</span>
-              <h2 class="center-align">
-                {{#if isStudent}}
-                 <i class="material-icons" style="font-size: 36px">star</i>{{userProfile.points}}
-                 {{/if}}
-            </h2>
-            </div>
-            </div>
-          </div>
     <div class="col s12 m6">
       <div class="card small blue darken-3" style="top: 2.5rem">
         <div class="card-content white-text">
@@ -783,6 +733,7 @@
       </div>
     </div>
 
+
   <div class="col s12 m6" style="padding-top: 2rem">
     <h4>Assistance Queue</h4>
     {{#if hasRequests}}
@@ -791,6 +742,7 @@
     </ul>
     {{else}}
     <p>There are no requests yet.</p>
+
     <div class="col s12 m6">
       <h4>Assistance Queue</h4>
       {{#if hasRequests}}
@@ -799,11 +751,9 @@
       </ul>
       {{else}}
       <p>There are no requests yet.</p>
-
-    {{/if}}
-  </div>
       {{/if}}
-    </div>
+      </div>
+      {{/if}}
   </div>
   <br>
   <div class="row">
@@ -892,7 +842,7 @@
       }
     });
   </script>
-
+</div>
 </template>
 
 
@@ -910,5 +860,4 @@
     </li>
   </ul>
   {{/each}}
-</template>
 </template>
