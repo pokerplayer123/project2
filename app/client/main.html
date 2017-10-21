@@ -188,13 +188,15 @@
 
 <template name="myTutorials">
   <h2>My Tutorials</h2>
-  <div class="col s12 m5 l4">
+  <div class="row">
+  <div class="col s12">
     {{#if hasTutorials}}
     {{#each tutorials}} {{> tutorial }} {{/each}}
     {{else}}
     <h5 style="color: grey">You currently have no tutorials... add a new tutorial.</h5>
     {{/if}}
   </div>
+</div>
 
   <div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
     <a class="btn-floating btn-large waves-effect waves-light align-right modal-trigger" href="/tutorials/add">
