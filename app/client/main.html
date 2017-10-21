@@ -674,7 +674,7 @@
       <p style="margin-right: 130px;">{{answer}}</p>
 
       <!--  -->
-
+ {{#if isThreadOwner2}}
       <div class="small right-align">
           <p class="stars right-align" style="right: 10px;">
             <input class="star star-5" id="star-5-{{_id}}" type="radio" name="star-{{_id}}" value="5" {{checkedStar5}}/>
@@ -690,8 +690,8 @@
             <br>
           </p>
             <br>
-
       </div>
+      {{/if}}
       <div id="like" class="small">
         <i class="small material-icons right" style="color: #9e9e9e">access_time</i>
       <p class="right" style="color: #9e9e9e">{{fromNow}}
