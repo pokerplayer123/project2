@@ -279,7 +279,7 @@ Template.tutorial.helpers({
 
 Template.tutorial.events({
   'click .delete-tutorial': function () {
-    var r = confirm('Do you want to delete this tutorial?');
+    var r = confirm('Are you sure you want to delete this tutorial? This will remove everything including dashboard and points.');
     if (r == true) {
       Meteor.call('tutorials.remove', this);
     }
@@ -577,7 +577,8 @@ Template.threadCard.helpers({
   // },
 
   points: function () {
-    return Meteor.user().profile.points;
+    var points = Meteor.user().profile.points
+    return Math.round(points);
   },
 
   isClosed: function () {
@@ -589,6 +590,7 @@ Template.threadCard.events({
   'click .delete-thread': function (e) {
     e.preventDefault();
     Meteor.call('threads.remove', this);
+    Materialize.toast('Item deleted!', 4000)
   },
 
   'click .pick-best-answer': function (e) {
